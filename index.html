@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zettbos | Konsultan Sistem Otomatisasi Bisnis & Data</title>
+    <title>Zettbos | Workflow Automation Solutions</title>
     <meta name="description" content="Tingkatkan efisiensi operasional bisnis Anda. Transformasi data manual Excel/Spreadsheet menjadi sistem manajemen otomatis yang terintegrasi.">
     
     <!-- Tailwind CSS -->
@@ -88,11 +88,12 @@
             transition: all 0.3s ease;
         }
 
+        /* HOVER EFFECT: Lebih putih (biar logo hitam kelihatan) & Popup */
         .logo-glass:hover {
-            background: rgba(255, 255, 255, 0.2); 
-            border-color: rgba(56, 189, 248, 0.5); 
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.9); /* Hampir putih solid */
+            border-color: #fff; 
+            transform: translateY(-5px) scale(1.02); /* Efek Popup */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         @media (min-width: 768px) {
@@ -135,7 +136,7 @@
                 <a href="#masalah" class="hover:text-primary transition">Tantangan</a>
                 <a href="#solusi" class="hover:text-primary transition">Solusi</a>
                 <a href="#cara-kerja" class="hover:text-primary transition">Metodologi</a>
-                <a href="#harga" class="hover:text-primary transition">Harga</a> <!-- Menu Baru -->
+                <a href="#harga" class="hover:text-primary transition">Harga</a> 
                 <a href="#testimoni" class="hover:text-primary transition">Klien</a>
             </div>
             <a href="#kontak" class="hidden md:inline-block bg-white text-dark px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition">
@@ -357,11 +358,12 @@
                     </ul>
                 </div>
                 
-                <!-- UPDATE: Mengganti Dashboard Image dengan Visualisasi "Before & After" -->
+                <!-- UPDATE: Fixing Blue Line Alignment -->
                 <div class="md:w-1/2" data-aos="fade-left">
                     <div class="space-y-6 relative">
-                        <!-- Connecting Line (Desktop Only) -->
-                        <div class="absolute left-8 top-10 bottom-10 w-0.5 bg-gradient-to-b from-red-900/50 to-primary/50 -z-10 hidden md:block"></div>
+                        <!-- Connecting Line (Adjusted Position) -->
+                        <!-- left-11 (2.75rem / 44px) aligns with the center of icons which have 24px padding + 20px half width -->
+                        <div class="absolute left-11 top-10 bottom-10 w-0.5 bg-gradient-to-b from-red-900/50 to-primary/50 -z-10 hidden md:block"></div>
 
                         <!-- Card Before (Cara Lama) -->
                         <div class="bg-darker border border-red-900/30 p-6 rounded-xl relative hover:border-red-500/30 transition duration-300">
@@ -381,8 +383,9 @@
                             </div>
                         </div>
 
-                        <!-- Arrow Transformation -->
-                        <div class="flex justify-center md:justify-start md:pl-5 -my-3 relative z-10">
+                        <!-- Arrow Transformation (Adjusted Position) -->
+                        <!-- md:ml-[2.75rem] moves left edge to 44px. -translate-x-1/2 centers it exactly on the line. -->
+                        <div class="flex justify-center md:block md:ml-[2.75rem] md:-translate-x-1/2 -my-3 relative z-10 w-fit">
                             <div class="bg-card border border-gray-700 p-1.5 rounded-full">
                                 <i data-lucide="arrow-down" class="text-gray-400 w-5 h-5"></i>
                             </div>
@@ -639,7 +642,7 @@
 
     <!-- FOOTER -->
     <footer class="py-10 border-t border-gray-800 text-center text-gray-500 text-sm">
-        <p>&copy; 2024 Zettbos Automation. Mitra Teknologi Bisnis Anda.</p>
+        <p>&copy; 2026 Zettbos. Workflow Automation Solutions.</p>
         <p class="mt-2">Jakarta, Indonesia</p>
     </footer>
 
