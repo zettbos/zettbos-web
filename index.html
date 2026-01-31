@@ -173,7 +173,7 @@
                 </a>
             </div>
 
-            <!-- UPDATE: Social Proof / Statistik -->
+            <!-- Social Proof / Statistik -->
             <div class="mt-16 border-t border-gray-800 pt-8" data-aos="fade-in" data-aos-delay="500">
                 <p class="text-sm text-gray-500 mb-6 uppercase tracking-wider font-semibold">TRACK RECORD KAMI</p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 justify-center items-center text-center">
@@ -357,48 +357,52 @@
                     </ul>
                 </div>
                 
+                <!-- UPDATE: Mengganti Dashboard Image dengan Visualisasi "Before & After" -->
                 <div class="md:w-1/2" data-aos="fade-left">
-                    <div class="relative bg-gray-800 rounded-xl border border-gray-700 p-6 shadow-2xl">
-                        <div class="flex items-center gap-2 mb-4 border-b border-gray-700 pb-4">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span class="text-xs text-gray-500 ml-auto">Dashboard_Eksekutif_Zettbos</span>
-                        </div>
-                        <div class="space-y-4">
-                            <!-- Mockup Data Bisnis -->
-                            <div class="flex justify-between items-center bg-gray-700/50 p-3 rounded border border-gray-600">
-                                <div>
-                                    <div class="text-xs text-gray-400">Pendapatan Bulan Berjalan</div>
-                                    <div class="text-white font-bold text-lg">Rp 850.450.000</div>
-                                </div>
-                                <div class="text-green-400 text-xs font-bold">+12% <i data-lucide="trending-up" class="inline w-3 h-3"></i></div>
-                            </div>
-                            
-                            <div class="flex gap-3">
-                                <div class="flex-1 bg-gray-700/30 p-3 rounded border border-gray-600">
-                                    <div class="text-xs text-gray-400">Piutang Usaha</div>
-                                    <div class="text-yellow-400 font-bold">5 Klien</div>
-                                </div>
-                                <div class="flex-1 bg-gray-700/30 p-3 rounded border border-gray-600">
-                                    <div class="text-xs text-gray-400">Peringatan Stok</div>
-                                    <div class="text-red-400 font-bold">3 SKU</div>
-                                </div>
-                            </div>
+                    <div class="space-y-6 relative">
+                        <!-- Connecting Line (Desktop Only) -->
+                        <div class="absolute left-8 top-10 bottom-10 w-0.5 bg-gradient-to-b from-red-900/50 to-primary/50 -z-10 hidden md:block"></div>
 
-                            <div class="h-1 bg-gray-700 rounded w-full mt-2">
-                                <div class="h-1 bg-primary rounded w-[70%]"></div>
+                        <!-- Card Before (Cara Lama) -->
+                        <div class="bg-darker border border-red-900/30 p-6 rounded-xl relative hover:border-red-500/30 transition duration-300">
+                            <div class="absolute top-4 right-4 text-red-500 bg-red-500/10 px-3 py-1 rounded-full text-xs font-bold tracking-wider">CARA LAMA</div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center flex-shrink-0 border border-red-500/20">
+                                    <i data-lucide="x" class="text-red-500 w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-200 font-bold mb-2">Manual & Berisiko</h4>
+                                    <ul class="space-y-2 text-sm text-gray-500">
+                                        <li>• Data berantakan di banyak file Excel</li>
+                                        <li>• Laporan telat & sering selisih</li>
+                                        <li>• Ketergantungan pada ingatan admin</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="text-xs text-gray-500 text-center">Data Real-time Terintegrasi</div>
                         </div>
-                        
-                        <div class="absolute -bottom-6 -left-6 bg-card border border-gray-700 p-4 rounded-lg shadow-xl flex items-center gap-3">
-                            <div class="bg-green-500/20 p-2 rounded-full text-green-400">
-                                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+
+                        <!-- Arrow Transformation -->
+                        <div class="flex justify-center md:justify-start md:pl-5 -my-3 relative z-10">
+                            <div class="bg-card border border-gray-700 p-1.5 rounded-full">
+                                <i data-lucide="arrow-down" class="text-gray-400 w-5 h-5"></i>
                             </div>
-                            <div>
-                                <div class="text-xs text-gray-400">Status Laporan</div>
-                                <div class="font-bold text-white">Tersedia Tepat Waktu</div>
+                        </div>
+
+                        <!-- Card After (Cara Zettbos) -->
+                        <div class="bg-primary/5 border border-primary/30 p-6 rounded-xl relative hover:border-primary/50 transition duration-300 shadow-lg shadow-primary/5">
+                            <div class="absolute top-4 right-4 text-primary bg-primary/10 px-3 py-1 rounded-full text-xs font-bold tracking-wider">HASIL ZETTBOS</div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 border border-primary/30">
+                                    <i data-lucide="check" class="text-primary w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold mb-2">Otomatis & Terkontrol</h4>
+                                    <ul class="space-y-2 text-sm text-gray-300">
+                                        <li>• Database terpusat & real-time</li>
+                                        <li>• Validasi data anti-salah input</li>
+                                        <li>• Sistem berjalan sendiri (Auto-pilot)</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
