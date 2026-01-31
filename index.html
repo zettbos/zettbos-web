@@ -101,7 +101,7 @@
     <!-- NAVIGATION -->
     <nav class="fixed w-full z-50 glass-card border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- LOGO & BRAND NAME -->
+            <!-- LOGO & BRAND NAME (Updated) -->
             <a href="#" class="flex items-center gap-3 group">
                 <img src="zettbos.png" alt="Zettbos Logo" class="h-8 md:h-10 w-auto object-contain group-hover:scale-105 transition duration-300">
                 <span class="font-brand text-2xl font-bold tracking-wide text-white group-hover:text-primary transition duration-300">ZETTBOS</span>
@@ -475,94 +475,97 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        lucide.createIcons();
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Init Icons
+            lucide.createIcons();
+            
+            // Init Animation (AOS) - Dipastikan berjalan setelah DOM ready
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 50
+            });
 
-        // --- SCRIPT UNTUK LOGO DRAG & AUTO SCROLL ---
-        const slider = document.getElementById('logo-slider');
-        const track = document.getElementById('logo-track');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-        let animationId;
+            // --- SCRIPT UNTUK LOGO DRAG & AUTO SCROLL ---
+            const slider = document.getElementById('logo-slider');
+            const track = document.getElementById('logo-track');
+            
+            if (slider && track) {
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+                let animationId;
 
-        // Duplikat konten logo biar scrolling-nya infinite (nyambung terus)
-        track.innerHTML += track.innerHTML;
+                // Duplikat konten logo biar scrolling-nya infinite (nyambung terus)
+                track.innerHTML += track.innerHTML;
 
-        // Fungsi Auto Scroll (Jalan pelan2)
-        function autoScroll() {
-            if(!isDown) {
-                slider.scrollLeft += 1; // Kecepatan gerak otomatis
-                // Kalau sudah mentok setengah (karena diduplikat), balikin ke 0 biar looping mulus
-                if (slider.scrollLeft >= slider.scrollWidth / 2) {
-                     slider.scrollLeft = 0;
+                // Fungsi Auto Scroll (Jalan pelan2)
+                function autoScroll() {
+                    if(!isDown) {
+                        slider.scrollLeft += 1; // Kecepatan gerak otomatis
+                        // Kalau sudah mentok setengah (karena diduplikat), balikin ke 0 biar looping mulus
+                        if (slider.scrollLeft >= slider.scrollWidth / 2) {
+                             slider.scrollLeft = 0;
+                        }
+                    }
+                    animationId = requestAnimationFrame(autoScroll);
                 }
+                
+                // Jalanin auto scroll pas loading
+                animationId = requestAnimationFrame(autoScroll);
+
+                // Mencegah select text saat drag
+                slider.addEventListener('mousedown', (e) => {
+                    e.preventDefault(); // Mencegah highlight teks/gambar
+                    isDown = true;
+                    slider.classList.add('cursor-grabbing');
+                    slider.classList.remove('cursor-grab');
+                    startX = e.pageX - slider.offsetLeft;
+                    scrollLeft = slider.scrollLeft;
+                    // cancelAnimationFrame(animationId); // Optional: stop saat drag
+                });
+
+                slider.addEventListener('mouseleave', () => {
+                    if(isDown) {
+                        isDown = false;
+                        slider.classList.remove('cursor-grabbing');
+                        slider.classList.add('cursor-grab');
+                    }
+                });
+
+                slider.addEventListener('mouseup', () => {
+                    isDown = false;
+                    slider.classList.remove('cursor-grabbing');
+                    slider.classList.add('cursor-grab');
+                });
+
+                slider.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - slider.offsetLeft;
+                    const walk = (x - startX) * 2; // Kecepatan nge-drag
+                    slider.scrollLeft = scrollLeft - walk;
+                });
+
+                // Event Listeners buat Touchscreen (HP)
+                slider.addEventListener('touchstart', (e) => {
+                    isDown = true;
+                    startX = e.touches[0].pageX - slider.offsetLeft;
+                    scrollLeft = slider.scrollLeft;
+                });
+
+                slider.addEventListener('touchend', () => {
+                    isDown = false;
+                });
+
+                slider.addEventListener('touchmove', (e) => {
+                    if (!isDown) return;
+                    const x = e.touches[0].pageX - slider.offsetLeft;
+                    const walk = (x - startX) * 2;
+                    slider.scrollLeft = scrollLeft - walk;
+                });
             }
-            animationId = requestAnimationFrame(autoScroll);
-        }
-        
-        // Jalanin auto scroll pas loading
-        animationId = requestAnimationFrame(autoScroll);
-
-        // Mencegah select text saat drag
-        slider.addEventListener('mousedown', (e) => {
-            e.preventDefault(); // Mencegah highlight teks/gambar
-            isDown = true;
-            slider.classList.add('cursor-grabbing');
-            slider.classList.remove('cursor-grab');
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-            cancelAnimationFrame(animationId); // Stop auto scroll pas lagi di-drag
         });
-
-        slider.addEventListener('mouseleave', () => {
-            if(isDown) {
-                isDown = false;
-                slider.classList.remove('cursor-grabbing');
-                slider.classList.add('cursor-grab');
-                requestAnimationFrame(autoScroll); // Jalanin lagi
-            }
-        });
-
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-            slider.classList.remove('cursor-grabbing');
-            slider.classList.add('cursor-grab');
-            requestAnimationFrame(autoScroll); // Jalanin lagi
-        });
-
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; // Kecepatan nge-drag
-            slider.scrollLeft = scrollLeft - walk;
-        });
-
-        // Event Listeners buat Touchscreen (HP)
-        slider.addEventListener('touchstart', (e) => {
-            isDown = true;
-            startX = e.touches[0].pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-            cancelAnimationFrame(animationId);
-        });
-
-        slider.addEventListener('touchend', () => {
-            isDown = false;
-            requestAnimationFrame(autoScroll);
-        });
-
-        slider.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            const x = e.touches[0].pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2;
-            slider.scrollLeft = scrollLeft - walk;
-        });
-
     </script>
 </body>
 </html>
