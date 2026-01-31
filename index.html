@@ -91,11 +91,11 @@
             transition: all 0.3s ease;
         }
 
-        /* HOVER EFFECT */
+        /* HOVER EFFECT: Lebih putih (biar logo hitam kelihatan) & Popup */
         .logo-glass:hover {
             background: rgba(255, 255, 255, 0.75); 
             border-color: #fff; 
-            transform: translateY(-5px) scale(1.02); 
+            transform: translateY(-5px) scale(1.02); /* Efek Popup */
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
@@ -739,7 +739,7 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        const apiKey = ""; // API Key will be provided by the environment
+        const apiKey = "AIzaSyBF-EdsmHKfzHshx5fdxJeiWkxbzij5T2c"; // Key dari Anda
 
         // Function to call Gemini API for consultation
         async function consultAI() {
