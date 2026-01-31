@@ -28,6 +28,7 @@
                         card: '#111827',
                         primary: '#38bdf8', // Cyan Biru Muda
                         secondary: '#818cf8', // Ungu Muda
+                        accent: '#10b981', // Hijau untuk harga
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -72,7 +73,7 @@
             padding: 0 15px; 
         }
 
-        /* Glass Container untuk Logo - LEBIH PUTIH */
+        /* Glass Container untuk Logo */
         .logo-glass {
             background: rgba(255, 255, 255, 0.1); 
             border: 1px solid rgba(255, 255, 255, 0.15); 
@@ -134,6 +135,7 @@
                 <a href="#masalah" class="hover:text-primary transition">Tantangan</a>
                 <a href="#solusi" class="hover:text-primary transition">Solusi</a>
                 <a href="#cara-kerja" class="hover:text-primary transition">Metodologi</a>
+                <a href="#harga" class="hover:text-primary transition">Harga</a> <!-- Menu Baru -->
                 <a href="#testimoni" class="hover:text-primary transition">Klien</a>
             </div>
             <a href="#kontak" class="hidden md:inline-block bg-white text-dark px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition">
@@ -171,20 +173,36 @@
                 </a>
             </div>
 
-            <!-- Social Proof (Text) -->
+            <!-- UPDATE: Social Proof / Statistik -->
             <div class="mt-16 border-t border-gray-800 pt-8" data-aos="fade-in" data-aos-delay="500">
-                <p class="text-sm text-gray-500 mb-4">INTEGRASI TEKNOLOGI UNTUK PERFORMA MAKSIMAL</p>
-                <div class="flex justify-center gap-8 grayscale opacity-50 hover:opacity-100 transition duration-500 flex-wrap">
-                    <span class="font-bold text-xl">Google Sheets</span>
-                    <span class="font-bold text-xl">Microsoft Excel</span>
-                    <span class="font-bold text-xl">WhatsApp API</span>
-                    <span class="font-bold text-xl">Apps Script</span>
+                <p class="text-sm text-gray-500 mb-6 uppercase tracking-wider font-semibold">TRACK RECORD KAMI</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 justify-center items-center text-center">
+                    <!-- Stat 1 -->
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1">35+</h3>
+                        <p class="text-sm text-gray-400">Proyek Terselesaikan</p>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1">99%</h3>
+                        <p class="text-sm text-gray-400">Lebih Hemat Waktu</p>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1">13rb+</h3>
+                        <p class="text-sm text-gray-400">Followers TikTok</p>
+                    </div>
+                    <!-- Stat 4 -->
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1">&lt;7 Hari</h3>
+                        <p class="text-sm text-gray-400">Rata-rata Pengerjaan</p>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- CLIENT LOGOS SECTION (UPDATED FILE NAMES) -->
+    <!-- CLIENT LOGOS SECTION -->
     <section class="py-12 border-b border-gray-800 bg-darker/50 overflow-hidden relative group">
         <div class="max-w-7xl mx-auto text-center px-6 mb-10">
             <p class="text-sm text-gray-500 uppercase tracking-widest font-semibold font-display">Dipercaya oleh perusahaan dan profesional di:</p>
@@ -267,7 +285,6 @@
             </div>
         </div>
 
-        <!-- Gradient Fade Overlay (Dark Theme) -->
         <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-darker to-transparent pointer-events-none md:hidden"></div>
         <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-darker to-transparent pointer-events-none md:hidden"></div>
     </section>
@@ -478,8 +495,78 @@
         </div>
     </section>
 
+    <!-- NEW SECTION: PRICING (HARGA) -->
+    <section id="harga" class="py-20 bg-darker border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Investasi Sistem</h2>
+                <p class="text-gray-400">Pilihan paket yang disesuaikan dengan skala dan kebutuhan bisnis Anda.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Paket Basic -->
+                <div class="glass-card p-8 rounded-2xl border-t-4 border-gray-500 flex flex-col relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <div class="mb-4">
+                        <h3 class="text-2xl font-bold text-white font-display">Basic</h3>
+                        <p class="text-sm text-gray-400 mt-2">Untuk Kebutuhan Individu</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-xs text-gray-500 block mb-1">Mulai dari</span>
+                        <div class="text-3xl font-bold text-white">Rp 375.000</div>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-grow text-sm text-gray-300">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-gray-500"></i> Otomasi Sederhana (Macro/Formula)</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-gray-500"></i> Task Ringan & Rutin Harian</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-gray-500"></i> Contoh: Generate Laporan Otomatis</li>
+                        <li class="flex gap-2"><i data-lucide="clock" class="w-5 h-5 text-gray-500"></i> Pengerjaan: ±1-7 Hari</li>
+                    </ul>
+                    <a href="#kontak" class="w-full py-3 rounded-lg border border-gray-600 text-white font-bold text-center hover:bg-gray-700 transition">Pilih Basic</a>
+                </div>
+
+                <!-- Paket Standard -->
+                <div class="glass-card p-8 rounded-2xl border-t-4 border-primary flex flex-col relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 bg-gray-800/30">
+                    <div class="absolute top-0 right-0 bg-primary text-darker text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
+                    <div class="mb-4">
+                        <h3 class="text-2xl font-bold text-white font-display">Standard</h3>
+                        <p class="text-sm text-gray-400 mt-2">Untuk UMKM & Tim</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-xs text-gray-500 block mb-1">Mulai dari</span>
+                        <div class="text-3xl font-bold text-primary">Rp 1.000.000</div>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-grow text-sm text-gray-300">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Otomasi Menengah (Apps Script)</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Laporan Bulanan & Integrasi Sheet</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Contoh: Dashboard & Rekonsiliasi Data</li>
+                        <li class="flex gap-2"><i data-lucide="clock" class="w-5 h-5 text-primary"></i> Pengerjaan: ±2-4 Minggu</li>
+                    </ul>
+                    <a href="#kontak" class="w-full py-3 rounded-lg bg-primary text-darker font-bold text-center hover:bg-sky-400 transition shadow-lg shadow-primary/20">Pilih Standard</a>
+                </div>
+
+                <!-- Paket Premium -->
+                <div class="glass-card p-8 rounded-2xl border-t-4 border-accent flex flex-col relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <div class="mb-4">
+                        <h3 class="text-2xl font-bold text-white font-display">Premium</h3>
+                        <p class="text-sm text-gray-400 mt-2">Untuk Perusahaan Besar</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-xs text-gray-500 block mb-1">Mulai dari</span>
+                        <div class="text-3xl font-bold text-white">Rp 4.500.000</div>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-grow text-sm text-gray-300">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-accent"></i> Otomasi Tingkat Advanced</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-accent"></i> Full Operasional Perusahaan</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-accent"></i> Contoh: Sistem Ops & Dashboard Interaktif</li>
+                        <li class="flex gap-2"><i data-lucide="clock" class="w-5 h-5 text-accent"></i> Pengerjaan: ±1-2 Bulan</li>
+                    </ul>
+                    <a href="#kontak" class="w-full py-3 rounded-lg border border-accent text-accent font-bold text-center hover:bg-accent hover:text-white transition">Pilih Premium</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ -->
-    <section class="py-20 bg-darker border-t border-gray-800">
+    <section class="py-20 bg-dark border-t border-gray-800">
         <div class="max-w-3xl mx-auto px-6">
             <h2 class="font-display text-3xl font-bold mb-8 text-center">Pertanyaan Umum</h2>
             <div class="space-y-4">
