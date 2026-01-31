@@ -58,8 +58,9 @@
         
         /* --- STYLE LOGO --- */
         .client-logo {
-            height: 3rem; /* Ukuran disesuaikan agar pas di card */
+            height: 4rem; /* Diperbesar dari 3rem (Mobile) */
             width: auto;
+            max-width: 90%; /* Menjaga logo lebar agar tetap masuk akal */
             object-fit: contain;
             opacity: 1; 
             transition: all 0.3s ease;
@@ -69,33 +70,34 @@
         
         .logo-item {
             flex-shrink: 0;
-            padding: 0 15px; /* Jarak antar card */
+            padding: 0 15px; 
         }
 
-        /* Glass Container untuk Logo */
+        /* Glass Container untuk Logo - LEBIH PUTIH */
         .logo-glass {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.1); /* Opacity dinaikkan agar lebih putih */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Border lebih tegas */
+            backdrop-filter: blur(8px);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 180px; /* Lebar card */
-            height: 100px; /* Tinggi card */
+            width: 180px; 
+            height: 100px; 
             transition: all 0.3s ease;
         }
 
         .logo-glass:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(56, 189, 248, 0.3); /* Warna primary saat hover */
+            background: rgba(255, 255, 255, 0.2); /* Hover lebih terang lagi */
+            border-color: rgba(56, 189, 248, 0.5); 
             transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
         @media (min-width: 768px) {
-            .client-logo { height: 3.5rem; } 
-            .logo-glass { width: 220px; height: 120px; }
+            .client-logo { height: 5rem; } /* Diperbesar dari 3.5rem (Desktop) */
+            .logo-glass { width: 240px; height: 130px; } /* Container sedikit diperbesar */
             .logo-item { padding: 0 20px; }
         }
 
@@ -183,7 +185,7 @@
         </div>
     </header>
 
-    <!-- CLIENT LOGOS SECTION (Updated: Dark BG + Glass Containers) -->
+    <!-- CLIENT LOGOS SECTION (Updated: Dark BG + Whiter Glass Containers + Bigger Logos) -->
     <section class="py-12 border-b border-gray-800 bg-darker/50 overflow-hidden relative group">
         <div class="max-w-7xl mx-auto text-center px-6 mb-10">
             <p class="text-sm text-gray-500 uppercase tracking-widest font-semibold font-display">Dipercaya oleh perusahaan dan profesional di:</p>
