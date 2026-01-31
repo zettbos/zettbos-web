@@ -58,7 +58,7 @@
         
         /* --- STYLE LOGO --- */
         .client-logo {
-            height: 3.5rem; 
+            height: 3rem; /* Ukuran disesuaikan agar pas di card */
             width: auto;
             object-fit: contain;
             opacity: 1; 
@@ -69,12 +69,34 @@
         
         .logo-item {
             flex-shrink: 0;
-            padding: 0 20px;
+            padding: 0 15px; /* Jarak antar card */
+        }
+
+        /* Glass Container untuk Logo */
+        .logo-glass {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 180px; /* Lebar card */
+            height: 100px; /* Tinggi card */
+            transition: all 0.3s ease;
+        }
+
+        .logo-glass:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(56, 189, 248, 0.3); /* Warna primary saat hover */
+            transform: translateY(-2px);
         }
 
         @media (min-width: 768px) {
-            .client-logo { height: 5rem; } 
-            .logo-item { padding: 0 40px; }
+            .client-logo { height: 3.5rem; } 
+            .logo-glass { width: 220px; height: 120px; }
+            .logo-item { padding: 0 20px; }
         }
 
         /* Hide Scrollbar */
@@ -161,35 +183,92 @@
         </div>
     </header>
 
-    <!-- CLIENT LOGOS SECTION -->
-    <section class="py-12 border-b border-gray-800 bg-gray-50 overflow-hidden relative group">
+    <!-- CLIENT LOGOS SECTION (Updated: Dark BG + Glass Containers) -->
+    <section class="py-12 border-b border-gray-800 bg-darker/50 overflow-hidden relative group">
         <div class="max-w-7xl mx-auto text-center px-6 mb-10">
-            <p class="text-sm text-gray-600 uppercase tracking-widest font-semibold font-display">Dipercaya oleh perusahaan dan profesional di:</p>
+            <p class="text-sm text-gray-500 uppercase tracking-widest font-semibold font-display">Dipercaya oleh perusahaan dan profesional di:</p>
         </div>
         
         <!-- Container Slider (Draggable) -->
         <div id="logo-slider" class="w-full overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing select-none">
             <div id="logo-track" class="w-max flex items-center">
                 <!-- LOGO ITEMS -->
-                <div class="logo-item"><img src="CLIENTS LOGO/Pertamina.png" alt="Pertamina" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/united tractor.png" alt="United Tractors" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/bsi.png" alt="BSI" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/monash university.png" alt="Monash University" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/bosnet.png" alt="Bosnet" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/bina artha.png" alt="Bina Artha" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/tbglobal.png" alt="TB Global" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/sparks.png" alt="Sparks" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/forever.png" alt="Forever" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/tarunaakademia.png" alt="Taruna Akademia" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/rs1.png" alt="Rumah Sakit" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/rs2.png" alt="Rumah Sakit" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/logo ssb transparant.png" alt="SSB" class="client-logo"></div>
-                <div class="logo-item"><img src="CLIENTS LOGO/LOGO JOURNEY-1 (1).png" alt="Journey" class="client-logo"></div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/Pertamina.png" alt="Pertamina" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/united tractor.png" alt="United Tractors" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/bsi.png" alt="BSI" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/monash university.png" alt="Monash University" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/bosnet.png" alt="Bosnet" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/bina artha.png" alt="Bina Artha" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/tbglobal.png" alt="TB Global" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/sparks.png" alt="Sparks" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/forever.png" alt="Forever" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/tarunaakademia.png" alt="Taruna Akademia" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/rs1.png" alt="Rumah Sakit" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/rs2.png" alt="Rumah Sakit" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/logo ssb transparant.png" alt="SSB" class="client-logo">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-glass">
+                        <img src="CLIENTS LOGO/LOGO JOURNEY-1 (1).png" alt="Journey" class="client-logo">
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-50 to-transparent pointer-events-none md:hidden"></div>
-        <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-gray-50 to-transparent pointer-events-none md:hidden"></div>
+        <!-- Gradient Fade Overlay (Dark Theme) -->
+        <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-darker to-transparent pointer-events-none md:hidden"></div>
+        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-darker to-transparent pointer-events-none md:hidden"></div>
     </section>
 
     <!-- PAIN POINTS -->
