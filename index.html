@@ -15,7 +15,7 @@
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Animasi Scroll -->
+    <!-- Animasi Scroll (AOS) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <script>
@@ -32,15 +32,6 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
-                    },
-                    animation: {
-                        'infinite-scroll': 'infinite-scroll 40s linear infinite',
-                    },
-                    keyframes: {
-                        'infinite-scroll': {
-                            from: { transform: 'translateX(0)' },
-                            to: { transform: 'translateX(-100%)' },
-                        }
                     }
                 }
             }
@@ -63,26 +54,47 @@
             box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
         }
         
-        /* Style Gambar Logo Baru (Terang & Ukuran Pas) */
+        /* --- UPDATE STYLE LOGO --- */
         .client-logo {
-            height: 3.5rem; /* Sedikit lebih besar biar jelas */
+            height: 3.5rem; 
             width: auto;
             object-fit: contain;
-            /* Filter dihapus biar terang terus */
-            opacity: 1; 
-            filter: grayscale(0%);
-            /* Kalau logo hitam mau dipaksa jadi putih, uncomment baris bawah ini: */
-            /* filter: brightness(0) invert(1); */
+            /* Trik bikin logo jadi Putih Monokrom */
+            filter: brightness(0) invert(1); 
+            opacity: 0.7; /* Agak transparan biar elegan */
+            transition: all 0.3s ease;
+            pointer-events: none; /* Biar gambar gak ke-drag pas user mau geser slider */
         }
         
+        /* Efek saat logo dihover (jadi terang 100%) */
+        .logo-item:hover .client-logo {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
         @media (min-width: 768px) {
             .client-logo { height: 5rem; } 
         }
+
+        /* Hide Scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Cursor Grabbing styles */
+        .cursor-grab { cursor: grab; }
+        .cursor-grabbing { cursor: grabbing; }
 
         /* FAQ Accordion Style */
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
         
+        /* Custom Scrollbar Website */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0B0F19; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
@@ -151,52 +163,39 @@
         </div>
     </header>
 
-    <!-- CLIENT LOGOS SECTION (UPDATED: Infinite Scroll & Bright Logos) -->
-    <section class="py-12 border-b border-gray-800 bg-darker/50 overflow-hidden">
-        <div class="max-w-7xl mx-auto text-center px-6">
-            <p class="text-sm text-gray-500 mb-10 uppercase tracking-widest font-semibold">Dipercaya oleh Perusahaan Terkemuka</p>
-            
-            <!-- Container Marquee -->
-            <div class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-                
-                <!-- SET 1 LOGO -->
-                <ul class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
-                    <li><img src="CLIENTS LOGO/Pertamina.png" alt="Pertamina" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/united tractor.png" alt="United Tractors" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/bsi.png" alt="BSI" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/monash university.png" alt="Monash University" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/bosnet.png" alt="Bosnet" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/bina artha.png" alt="Bina Artha" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/tbglobal.png" alt="TB Global" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/sparks.png" alt="Sparks" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/forever.png" alt="Forever" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/tarunaakademia.png" alt="Taruna Akademia" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/rs1.png" alt="Rumah Sakit" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/rs2.png" alt="Rumah Sakit" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/logo ssb transparant.png" alt="SSB" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/LOGO JOURNEY-1 (1).png" alt="Journey" class="client-logo"></li>
-                </ul>
-
-                <!-- SET 2 LOGO (DUPLIKAT WAJIB UTK LOOPING) -->
-                <ul class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll" aria-hidden="true">
-                    <li><img src="CLIENTS LOGO/Pertamina.png" alt="Pertamina" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/united tractor.png" alt="United Tractors" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/bsi.png" alt="BSI" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/monash university.png" alt="Monash University" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/bosnet.png" alt="Bosnet" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/bina artha.png" alt="Bina Artha" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/tbglobal.png" alt="TB Global" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/sparks.png" alt="Sparks" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/forever.png" alt="Forever" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/tarunaakademia.png" alt="Taruna Akademia" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/rs1.png" alt="Rumah Sakit" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/rs2.png" alt="Rumah Sakit" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/logo ssb transparant.png" alt="SSB" class="client-logo"></li>
-                    <li><img src="CLIENTS LOGO/LOGO JOURNEY-1 (1).png" alt="Journey" class="client-logo"></li>
-                </ul>
-                
+    <!-- CLIENT LOGOS SECTION (UPDATED: Draggable & White Logos) -->
+    <section class="py-12 border-b border-gray-800 bg-darker/50 overflow-hidden relative group">
+        <div class="max-w-7xl mx-auto text-center px-6 mb-10">
+            <!-- Update Text Judul -->
+            <p class="text-sm text-gray-500 uppercase tracking-widest font-semibold">Kami dipercaya oleh perusahaan dan individu yang berkarier di:</p>
+        </div>
+        
+        <!-- Container Slider (Draggable) -->
+        <div 
+            id="logo-slider" 
+            class="w-full overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing select-none"
+        >
+            <div id="logo-track" class="w-max flex items-center gap-12 px-6 md:px-0">
+                <!-- LOGO ITEMS (Original) -->
+                <div class="logo-item"><img src="CLIENTS LOGO/Pertamina.png" alt="Pertamina" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/united tractor.png" alt="United Tractors" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/bsi.png" alt="BSI" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/monash university.png" alt="Monash University" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/bosnet.png" alt="Bosnet" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/bina artha.png" alt="Bina Artha" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/tbglobal.png" alt="TB Global" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/sparks.png" alt="Sparks" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/forever.png" alt="Forever" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/tarunaakademia.png" alt="Taruna Akademia" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/rs1.png" alt="Rumah Sakit" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/rs2.png" alt="Rumah Sakit" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/logo ssb transparant.png" alt="SSB" class="client-logo"></div>
+                <div class="logo-item"><img src="CLIENTS LOGO/LOGO JOURNEY-1 (1).png" alt="Journey" class="client-logo"></div>
             </div>
         </div>
+
+        <!-- Hint Overlay (Mobile) -->
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-20 h-20 bg-gradient-to-l from-darker to-transparent pointer-events-none md:hidden"></div>
     </section>
 
     <!-- PAIN POINTS -->
@@ -456,6 +455,85 @@
             once: true,
             offset: 50
         });
+
+        // --- SCRIPT UNTUK LOGO DRAG & AUTO SCROLL ---
+        const slider = document.getElementById('logo-slider');
+        const track = document.getElementById('logo-track');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let animationId;
+
+        // Duplikat konten logo biar scrolling-nya infinite (nyambung terus)
+        track.innerHTML += track.innerHTML;
+
+        // Fungsi Auto Scroll (Jalan pelan2)
+        function autoScroll() {
+            if(!isDown) {
+                slider.scrollLeft += 1; // Kecepatan gerak otomatis
+                // Kalau sudah mentok setengah (karena diduplikat), balikin ke 0 biar looping mulus
+                if (slider.scrollLeft >= slider.scrollWidth / 2) {
+                     slider.scrollLeft = 0;
+                }
+            }
+            animationId = requestAnimationFrame(autoScroll);
+        }
+        
+        // Jalanin auto scroll pas loading
+        animationId = requestAnimationFrame(autoScroll);
+
+        // Event Listeners buat Dragging (Mouse)
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('cursor-grabbing');
+            slider.classList.remove('cursor-grab');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+            cancelAnimationFrame(animationId); // Stop auto scroll pas lagi di-drag
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('cursor-grabbing');
+            slider.classList.add('cursor-grab');
+            requestAnimationFrame(autoScroll); // Jalanin lagi
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('cursor-grabbing');
+            slider.classList.add('cursor-grab');
+            requestAnimationFrame(autoScroll); // Jalanin lagi
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // Kecepatan nge-drag
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+        // Event Listeners buat Touchscreen (HP)
+        slider.addEventListener('touchstart', (e) => {
+            isDown = true;
+            startX = e.touches[0].pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+            cancelAnimationFrame(animationId);
+        });
+
+        slider.addEventListener('touchend', () => {
+            isDown = false;
+            requestAnimationFrame(autoScroll);
+        });
+
+        slider.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
+            const x = e.touches[0].pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2;
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
     </script>
 </body>
 </html>
