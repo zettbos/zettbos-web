@@ -32,6 +32,15 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    animation: {
+                        'infinite-scroll': 'infinite-scroll 40s linear infinite',
+                    },
+                    keyframes: {
+                        'infinite-scroll': {
+                            from: { transform: 'translateX(0)' },
+                            to: { transform: 'translateX(-100%)' },
+                        }
                     }
                 }
             }
@@ -53,20 +62,21 @@
         .cta-glow {
             box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
         }
-        /* Style Gambar Logo Biar Rapi */
+        
+        /* Style Gambar Logo Baru (Terang & Ukuran Pas) */
         .client-logo {
-            height: 3rem; /* Ukuran default di HP */
+            height: 3.5rem; /* Sedikit lebih besar biar jelas */
             width: auto;
             object-fit: contain;
-            filter: grayscale(100%) opacity(0.6);
-            transition: all 0.3s ease;
+            /* Filter dihapus biar terang terus */
+            opacity: 1; 
+            filter: grayscale(0%);
+            /* Kalau logo hitam mau dipaksa jadi putih, uncomment baris bawah ini: */
+            /* filter: brightness(0) invert(1); */
         }
-        .client-logo:hover {
-            filter: grayscale(0%) opacity(1);
-            transform: scale(1.1);
-        }
+        
         @media (min-width: 768px) {
-            .client-logo { height: 4rem; } /* Ukuran di Laptop */
+            .client-logo { height: 5rem; } 
         }
 
         /* FAQ Accordion Style */
@@ -141,51 +151,50 @@
         </div>
     </header>
 
-    <!-- CLIENT LOGOS SECTION -->
-    <section class="py-12 border-b border-gray-800 bg-darker/50">
-        <div class="max-w-7xl mx-auto px-6 text-center">
+    <!-- CLIENT LOGOS SECTION (UPDATED: Infinite Scroll & Bright Logos) -->
+    <section class="py-12 border-b border-gray-800 bg-darker/50 overflow-hidden">
+        <div class="max-w-7xl mx-auto text-center px-6">
             <p class="text-sm text-gray-500 mb-10 uppercase tracking-widest font-semibold">Dipercaya oleh Perusahaan Terkemuka</p>
             
-            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16">
-                <!-- Logo Pertamina (Huruf Depan Besar) -->
-                <img src="CLIENTS LOGO/Pertamina.png" alt="Pertamina" class="client-logo">
+            <!-- Container Marquee -->
+            <div class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
                 
-                <!-- Logo United Tractors (Huruf Kecil) -->
-                <img src="CLIENTS LOGO/united tractor.png" alt="United Tractors" class="client-logo">
-                
-                <!-- Logo BSI (Huruf Kecil) -->
-                <img src="CLIENTS LOGO/bsi.png" alt="BSI" class="client-logo">
-                
-                <!-- Logo Monash University (Huruf Kecil) -->
-                <img src="CLIENTS LOGO/monash university.png" alt="Monash University" class="client-logo">
-                
-                <!-- Logo Bosnet (Huruf Kecil) -->
-                <img src="CLIENTS LOGO/bosnet.png" alt="Bosnet" class="client-logo">
-                
-                <!-- Logo Bina Artha (Huruf Kecil) -->
-                <img src="CLIENTS LOGO/bina artha.png" alt="Bina Artha" class="client-logo">
-                
-                <!-- Logo TB Global (Huruf Kecil) -->
-                <img src="CLIENTS LOGO/tbglobal.png" alt="TB Global" class="client-logo">
-                
-                <!-- Logo Sparks (Huruf Kecil) -->
-                <img src="CLIENTS LOGO/sparks.png" alt="Sparks" class="client-logo">
+                <!-- SET 1 LOGO -->
+                <ul class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
+                    <li><img src="CLIENTS LOGO/Pertamina.png" alt="Pertamina" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/united tractor.png" alt="United Tractors" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/bsi.png" alt="BSI" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/monash university.png" alt="Monash University" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/bosnet.png" alt="Bosnet" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/bina artha.png" alt="Bina Artha" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/tbglobal.png" alt="TB Global" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/sparks.png" alt="Sparks" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/forever.png" alt="Forever" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/tarunaakademia.png" alt="Taruna Akademia" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/rs1.png" alt="Rumah Sakit" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/rs2.png" alt="Rumah Sakit" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/logo ssb transparant.png" alt="SSB" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/LOGO JOURNEY-1 (1).png" alt="Journey" class="client-logo"></li>
+                </ul>
 
-                <!-- Logo Forever (Huruf Kecil) -->
-                <img src="CLIENTS LOGO/forever.png" alt="Forever" class="client-logo">
+                <!-- SET 2 LOGO (DUPLIKAT WAJIB UTK LOOPING) -->
+                <ul class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll" aria-hidden="true">
+                    <li><img src="CLIENTS LOGO/Pertamina.png" alt="Pertamina" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/united tractor.png" alt="United Tractors" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/bsi.png" alt="BSI" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/monash university.png" alt="Monash University" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/bosnet.png" alt="Bosnet" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/bina artha.png" alt="Bina Artha" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/tbglobal.png" alt="TB Global" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/sparks.png" alt="Sparks" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/forever.png" alt="Forever" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/tarunaakademia.png" alt="Taruna Akademia" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/rs1.png" alt="Rumah Sakit" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/rs2.png" alt="Rumah Sakit" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/logo ssb transparant.png" alt="SSB" class="client-logo"></li>
+                    <li><img src="CLIENTS LOGO/LOGO JOURNEY-1 (1).png" alt="Journey" class="client-logo"></li>
+                </ul>
                 
-                <!-- Logo Taruna Akademia (Huruf Kecil) -->
-                <img src="CLIENTS LOGO/tarunaakademia.png" alt="Taruna Akademia" class="client-logo">
-
-                 <!-- Logo RS1 & RS2 (Huruf Kecil) -->
-                 <img src="CLIENTS LOGO/rs1.png" alt="Rumah Sakit" class="client-logo">
-                 <img src="CLIENTS LOGO/rs2.png" alt="Rumah Sakit" class="client-logo">
-
-                 <!-- Logo SSB (Huruf Kecil) -->
-                 <img src="CLIENTS LOGO/logo ssb transparant.png" alt="SSB" class="client-logo">
-
-                 <!-- Logo Journey (Huruf Besar & Ada Kurungnya) -->
-                 <img src="CLIENTS LOGO/LOGO JOURNEY-1 (1).png" alt="Journey" class="client-logo">
             </div>
         </div>
     </section>
