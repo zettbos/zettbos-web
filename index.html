@@ -977,27 +977,14 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                     </svg>
-                    Konsultasi dengan Tim Zettbos
+                    @zettbos
                 </a>
-                <p class="text-sm text-gray-500">Respon cepat & Diskusi langsung dengan Tim Zettbos.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="py-10 border-t border-gray-800 text-center text-gray-500 text-sm">
-        <p>&copy; 2026 Zettbos. Workflow Automation Solutions.</p>
-        <p class="mt-2">Jakarta, Indonesia</p>
-        <a href="https://tiktok.com/@zettbos" target="_blank" class="inline-flex items-center gap-2 mt-4 text-gray-400 hover:text-white transition">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music-2"><circle cx="8" cy="18" r="4"/><path d="M12 18V2l7 4"/></svg>
-            @zettbos
-        </a>
     </footer>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        const apiKey = "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"; // Key OPENROUTER
+        const apiKey = "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"; // Key OPENROUTER BARU
 
         // Function to call Gemini API for consultation via OpenRouter
         async function consultAI() {
@@ -1035,7 +1022,6 @@
             try {
                 // Prepare OpenRouter / OpenAI compatible payload
                 const payload = {
-                    // MENGGUNAKAN MODEL GRATIS OPENROUTER AGAR TIDAK 401 (UNAUTHORIZED)
                     model: "google/gemini-2.0-flash-exp:free", 
                     messages: [
                         { role: "system", content: systemPrompt },
@@ -1048,7 +1034,6 @@
                     headers: {
                         'Authorization': `Bearer ${apiKey}`,
                         'Content-Type': 'application/json',
-                        // HEADERS TAMBAHAN WAJIB UNTUK OPENROUTER AGAR TIDAK DIBLOKIR
                         'HTTP-Referer': window.location.href, // Site URL for rankings
                         'X-Title': 'Zettbos Demo Site' // Site title for rankings
                     },
@@ -1056,12 +1041,6 @@
                 });
 
                 if (!response.ok) {
-                    // Handle specific error codes
-                    if (response.status === 401) {
-                        throw new Error("API Key Invalid atau Saldo Habis (401)");
-                    } else if (response.status === 429) {
-                        throw new Error("Rate Limit Exceeded (429) - Coba lagi nanti");
-                    }
                     throw new Error(`API Error: ${response.status}`);
                 }
 
@@ -1082,10 +1061,11 @@
 
             } catch (error) {
                 console.error("AI Error:", error);
-                resultText.innerHTML = `<div class="p-4 bg-red-900/30 border border-red-500/50 rounded-lg text-red-200 text-sm">
-                    <strong>Maaf, sistem AI sedang sibuk.</strong><br>
-                    Detail Error: ${error.message}<br><br>
-                    <span class="opacity-75">Saran: Periksa API Key OpenRouter Anda atau gunakan model gratis 'google/gemini-2.0-flash-exp:free'.</span>
+                // PESAN ERROR RAMAH (NON-TEKNIS)
+                resultText.innerHTML = `<div class="p-4 bg-blue-900/30 border border-blue-500/50 rounded-lg text-blue-200 text-sm">
+                    <strong>Mohon Maaf.</strong><br>
+                    Fitur Zettbos AI saat ini sedang dalam tahap pengembangan dan maintenance rutin untuk peningkatan kualitas layanan.<br><br>
+                    <span class="opacity-90">Silakan hubungi tim kami langsung via WhatsApp untuk mendapatkan solusi instan atas permasalahan Anda.</span>
                 </div>`;
                 resultContainer.classList.remove('hidden');
             } finally {
@@ -1249,26 +1229,34 @@
             });
         });
 
-        // Animated Counters Logic - UPDATED: Callable directly
+        // REVISED Animated Counters Logic
         const counters = document.querySelectorAll('.counter');
-        const speed = 200; // The lower the slower
 
         const animateCounters = () => {
+            const duration = 2000; // 2 seconds animation for everyone
+            const frameDuration = 1000 / 60; // 60fps
+            const totalFrames = Math.round(duration / frameDuration);
+
             counters.forEach(counter => {
-                // Reset first to ensure animation starts from 0 visually if called multiple times
-                counter.innerText = '0'; 
+                const target = +counter.getAttribute('data-target');
+                let frame = 0;
+                
+                // Simple easing function
+                const easeOutQuad = t => t * (2 - t);
                 
                 const updateCount = () => {
-                    const target = +counter.getAttribute('data-target');
-                    const count = +counter.innerText;
-                    
-                    // Lower increment to slow and higher to fast
-                    const inc = target / speed;
+                    frame++;
+                    const progress = easeOutQuad(frame / totalFrames);
+                    const currentCount = Math.round(target * progress);
 
-                    if (count < target) {
-                        // Add inc to count and output in counter
-                        counter.innerText = Math.ceil(count + inc);
-                        setTimeout(updateCount, 20);
+                    if (target < 1000) { 
+                         counter.innerText = currentCount;
+                    } else {
+                         counter.innerText = currentCount;
+                    }
+
+                    if (frame < totalFrames) {
+                        requestAnimationFrame(updateCount);
                     } else {
                         counter.innerText = target;
                     }
