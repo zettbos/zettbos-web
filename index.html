@@ -57,47 +57,35 @@
     <style>
         body { background-color: #0B0F19; color: #f8fafc; overflow-x: hidden; }
         
-        /* Preloader Style Updated */
+        /* Preloader Style Updated based on user reference */
         #preloader {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: #050912;
             z-index: 9999;
             display: flex;
-            flex-col: column;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.5s ease-out, visibility 0.5s;
-        }
-        
-        .loader-text-container {
-            text-align: center;
-            /* Margin removed as bar is now positioned absolutely at bottom */
+            transition: opacity 0.5s ease-out;
         }
 
         .loader-bar {
-            width: 240px;
-            height: 2px;
+            width: 200px; /* Ukuran kompak sesuai request */
+            height: 3px;
             background: rgba(56, 189, 248, 0.2);
             border-radius: 4px;
             overflow: hidden;
-            position: absolute; /* Pindah ke absolute */
-            bottom: 20%; /* Posisi di bawah layar */
+            margin-top: 1.5rem; /* Jarak dari teks */
+            position: relative;
         }
         
         .loader-progress {
-            width: 0%;
+            width: 0%; /* Start from 0 controlled by JS */
             height: 100%;
             background: #38bdf8;
             box-shadow: 0 0 10px #38bdf8;
-            animation: load 2.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes load { 
-            0% { width: 0%; } 
-            40% { width: 40%; }
-            70% { width: 60%; }
-            100% { width: 100%; } 
+            transition: width 0.5s ease-out; /* Smooth transition for JS width changes */
         }
 
         /* Particle Canvas - Fixed Position */
@@ -273,18 +261,16 @@
 </head>
 <body class="antialiased">
 
-    <!-- 1. PRELOADER SYSTEM UPDATED -->
+    <!-- Preloader (Updated Structure) -->
     <div id="preloader">
-        <div class="loader-text-container font-mono">
-            <div class="text-3xl md:text-4xl font-bold tracking-widest mb-4">
-                <span class="text-white">ZETTBOS</span><span class="text-primary">.</span><span class="text-white">SYSTEMS</span>
-            </div>
-            <div id="loader-status" class="text-primary text-sm md:text-base tracking-widest animate-pulse">
-                Initializing Modules...
-            </div>
+        <div class="text-3xl md:text-4xl font-display font-bold text-white tracking-widest text-center">
+            ZETTBOS<span class="text-primary">.</span>SYSTEMS
+        </div>
+        <div class="text-xs md:text-sm text-primary mt-2 font-mono tracking-widest" id="loader-text">
+            Initializing Modules...
         </div>
         <div class="loader-bar">
-            <div class="loader-progress"></div>
+            <div class="loader-progress" id="loader-progress"></div>
         </div>
     </div>
 
@@ -399,10 +385,13 @@
         
         <div id="logo-slider" class="w-full overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing select-none py-6">
             <div id="logo-track" class="w-max flex items-center">
+                <!-- Urutan Logo Diperbarui: ars2.png di urutan ke-4 -->
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/Pertamina.png" alt="Pertamina" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/united tractor.png" alt="United Tractors" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/bsi.png" alt="BSI" class="client-logo"></div></div>
+                <!-- LOGO ARS2 DIPINDAHKAN KE SINI (URUTAN 4) -->
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/ars2.png" alt="Rumah Sakit" class="client-logo"></div></div>
+                
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/Monash_University_logo.png" alt="Monash University" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/bosnet.png" alt="Bosnet" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/bina artha.png" alt="Bina Artha" class="client-logo"></div></div>
@@ -411,6 +400,7 @@
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/forever.png" alt="Forever" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/tarunaakademia.png" alt="Taruna Akademia" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/rs1.png" alt="Rumah Sakit" class="client-logo"></div></div>
+                <!-- Logo ars2 sebelumnya disini, sudah dipindah -->
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/logo ssb transparant.png" alt="SSB" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/logo journey putih.png" alt="Journey" class="client-logo"></div></div>
             </div>
@@ -1316,33 +1306,38 @@
 
         // Preloader Logic
         window.addEventListener('load', () => {
-             const preloader = document.getElementById('preloader');
-             const loaderStatus = document.getElementById('loader-status');
-             
-             // Change text logic
-             setTimeout(() => {
-                 if(loaderStatus) loaderStatus.innerText = "Loading Core Logic...";
-             }, 800);
-
-             setTimeout(() => {
-                 if(loaderStatus) loaderStatus.innerText = "System Ready.";
-             }, 1600);
-
-             setTimeout(() => {
-                 preloader.style.opacity = '0';
-                 preloader.style.visibility = 'hidden';
-                 
-                 // Init AOS after preloader
-                 AOS.init({
-                    duration: 800,
-                    once: true,
-                    offset: 50
-                });
-
-                // TRIGGER COUNTERS IMMEDIATELY AFTER LOADING
-                animateCounters();
-
-             }, 2500); // slightly longer to show all texts
+            const progress = document.getElementById('loader-progress');
+            const preloader = document.getElementById('preloader');
+            const text = document.getElementById('loader-text');
+            
+            // Initial state check
+            
+            setTimeout(() => { 
+                if(progress) progress.style.width = '50%'; 
+                if(text) text.innerText = "Loading Modules..."; 
+            }, 500);
+            
+            setTimeout(() => { 
+                if(progress) progress.style.width = '100%'; 
+                if(text) text.innerText = "System Ready."; 
+            }, 1200);
+            
+            setTimeout(() => { 
+                if(preloader) {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                        // Initialize AOS and other stuff here if needed
+                        AOS.init({
+                            duration: 800,
+                            once: true,
+                            offset: 50
+                        });
+                        // Animation logic from previous script
+                        if(typeof animateCounters === 'function') animateCounters();
+                    }, 500); 
+                }
+            }, 1600);
         });
 
         document.addEventListener('DOMContentLoaded', () => {
