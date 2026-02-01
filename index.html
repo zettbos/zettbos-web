@@ -132,9 +132,16 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: transform 0.1s ease-out;
-            transform-style: preserve-3d;
+            /* Removed preserve-3d to disable heavy 3D calculations */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        
+        /* NEW: Simple Pop Up Hover Effect */
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px -10px rgba(56, 189, 248, 0.2);
+        }
+
         .cta-glow {
             box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
         }
@@ -206,6 +213,21 @@
             50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
         }
         .ai-glow { animation: pulse-glow 2s infinite; }
+
+        /* NEW: Light Pulse Animation for Header Text */
+        @keyframes light-pulse {
+            0%, 100% { 
+                text-shadow: 0 0 2px rgba(255, 255, 255, 0.1); 
+                color: #d1d5db; /* gray-300 */
+            }
+            50% { 
+                text-shadow: 0 0 15px rgba(56, 189, 248, 0.8), 0 0 5px rgba(255, 255, 255, 0.5); 
+                color: #ffffff;
+            }
+        }
+        .animate-light-pulse {
+            animation: light-pulse 3s infinite ease-in-out;
+        }
 
         /* Markdown Styles for AI Response */
         .prose strong { color: #38bdf8; font-weight: 700; }
@@ -301,7 +323,8 @@
             <!-- REVISI TEKS -->
             <div class="inline-flex items-center px-3 py-1 rounded-full border border-gray-700 bg-gray-900/50 mb-6 backdrop-blur-md" data-aos="fade-down">
                 <span class="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
-                <span class="text-xs text-gray-300 tracking-wide uppercase font-semibold">Zettbos | Automation Workflow Solutions</span>
+                <!-- Added animate-light-pulse here -->
+                <span class="text-xs tracking-wide uppercase font-semibold animate-light-pulse">Zettbos | Automation Workflow Solutions</span>
             </div>
             
             <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 h-[160px] md:h-auto" data-aos="fade-up" data-aos-delay="100">
@@ -405,21 +428,22 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group glass-card tilt-card" data-aos="fade-up">
+                <!-- Removed tilt-card class, kept glass-card but relying on CSS hover -->
+                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group glass-card" data-aos="fade-up">
                     <div class="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6 text-red-500">
                         <i data-lucide="clock"></i> 
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-white">Keputusan Bisnis Selalu Terlambat</h3>
                     <p class="text-gray-400 text-sm">Keputusan strategis sering diambil berdasarkan data yang sudah tidak relevan karena laporan keuangan dan operasional baru tersedia setelah proses rekap manual yang panjang dan berulang.</p>
                 </div>
-                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group glass-card tilt-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group glass-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6 text-red-500">
                         <i data-lucide="repeat"></i> 
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-white">Tim Terjebak Pekerjaan Repetitif</h3>
                     <p class="text-gray-400 text-sm">Waktu kerja tim habis untuk aktivitas berulang seperti input, penyalinan, dan pengecekan data, sehingga fokus pada analisis dan pengambilan keputusan menjadi terbatas.</p>
                 </div>
-                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group glass-card tilt-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group glass-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6 text-red-500">
                         <i data-lucide="users"></i> 
                     </div>
@@ -1215,29 +1239,10 @@
         type();
 
         // 3D Tilt Effect Logic (Lightweight)
-        const tiltCards = document.querySelectorAll('.tilt-card');
-        
-        tiltCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
-                const rotateY = ((x - centerX) / centerX) * 5;
+        // REMOVED as per user request to disable tilt effect.
+        // Replaced with simple CSS hover effect in style block.
 
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-            });
-        });
-
-        // REVISED Animated Counters Logic
+        // Animated Counters Logic
         const counters = document.querySelectorAll('.counter');
 
         const animateCounters = () => {
