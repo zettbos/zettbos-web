@@ -997,9 +997,9 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        const apiKey = "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"; // Key OPENROUTER BARU
+        const apiKey = ""; // KEY OTOMATIS DARI ENVIRONMENT (GOOGLE GEMINI)
 
-        // Function to call Gemini API for consultation via OpenRouter
+        // Function to call Gemini API for consultation
         async function consultAI() {
             const userProblem = document.getElementById('userProblem').value.trim();
             const resultContainer = document.getElementById('ai-result-container');
@@ -1033,22 +1033,20 @@
             `;
 
             try {
-                // Prepare OpenRouter / OpenAI compatible payload
+                // MENGGUNAKAN GOOGLE GEMINI API NATIVE
                 const payload = {
-                    model: "google/gemini-2.0-flash-exp:free", 
-                    messages: [
-                        { role: "system", content: systemPrompt },
-                        { role: "user", content: `User Problem: ${userProblem}` }
-                    ]
+                    contents: [{
+                        parts: [{ text: `User Problem: ${userProblem}` }]
+                    }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    }
                 };
 
-                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${apiKey}`,
-                        'Content-Type': 'application/json',
-                        'HTTP-Referer': window.location.href, // Site URL for rankings
-                        'X-Title': 'Zettbos Demo Site' // Site title for rankings
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(payload)
                 });
@@ -1058,9 +1056,7 @@
                 }
 
                 const data = await response.json();
-                
-                // Fallback handling for diverse OpenRouter response structures
-                const aiText = data.choices?.[0]?.message?.content || data.candidates?.[0]?.content?.parts?.[0]?.text;
+                const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text;
 
                 if (aiText) {
                     // Parse Markdown safely
@@ -1077,8 +1073,7 @@
                 // PESAN ERROR RAMAH (NON-TEKNIS)
                 resultText.innerHTML = `<div class="p-4 bg-blue-900/30 border border-blue-500/50 rounded-lg text-blue-200 text-sm">
                     <strong>Mohon Maaf.</strong><br>
-                    Fitur Zettbos AI saat ini sedang dalam tahap pengembangan dan maintenance rutin untuk peningkatan kualitas layanan.<br><br>
-                    <span class="opacity-90">Silakan hubungi tim kami langsung via WhatsApp untuk mendapatkan solusi instan atas permasalahan Anda.</span>
+                    Sistem AI sedang sibuk. Silakan coba beberapa saat lagi atau hubungi tim kami langsung via WhatsApp untuk respon instan.
                 </div>`;
                 resultContainer.classList.remove('hidden');
             } finally {
@@ -1452,4 +1447,4 @@
         });
     </script>
 </body>
-</html>1
+</html>
