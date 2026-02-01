@@ -37,6 +37,15 @@
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
                         brand: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'blink': 'blink 1s step-end infinite',
+                    },
+                    keyframes: {
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        }
                     }
                 }
             }
@@ -44,21 +53,74 @@
     </script>
 
     <style>
-        body { background-color: #0B0F19; color: #f8fafc; }
+        body { background-color: #0B0F19; color: #f8fafc; overflow-x: hidden; }
+        
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #050912;
+            z-index: 9999;
+            display: flex;
+            flex-col: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+        .loader-bar {
+            width: 200px;
+            height: 4px;
+            background: #1e293b;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .loader-progress {
+            width: 0%;
+            height: 100%;
+            background: #38bdf8;
+            animation: load 2s ease-in-out forwards;
+        }
+        @keyframes load { 0% { width: 0%; } 100% { width: 100%; } }
+
+        /* Particle Canvas */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
         .gradient-text {
             background: linear-gradient(to right, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* Enhanced Glassmorphism */
         .glass-card {
-            background: rgba(17, 24, 39, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(17, 24, 39, 0.6); /* Lebih transparan */
+            backdrop-filter: blur(12px); /* Blur lebih kuat */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.1s ease-out; /* Smooth for tilt */
+            transform-style: preserve-3d;
         }
+        
         .cta-glow {
             box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
         }
         
+        /* Cursor Typing */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: #38bdf8;
+        }
+
         /* --- STYLE LOGO --- */
         .client-logo {
             height: 4rem; 
@@ -91,12 +153,13 @@
             transition: all 0.3s ease;
         }
 
-        /* HOVER EFFECT: Lebih putih (biar logo hitam kelihatan) & Popup */
+        /* HOVER EFFECT: Lebih putih & Popup */
         .logo-glass:hover {
             background: rgba(255, 255, 255, 0.75); 
             border-color: #fff; 
-            transform: translateY(-5px) scale(1.02); /* Efek Popup */
+            transform: translateY(-5px) scale(1.02);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 10;
         }
 
         @media (min-width: 768px) {
@@ -136,10 +199,19 @@
         ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
     </style>
 </head>
-<body class="antialiased overflow-x-hidden">
+<body class="antialiased">
+
+    <!-- 1. PRELOADER SYSTEM -->
+    <div id="preloader">
+        <div class="text-primary font-brand text-3xl font-bold tracking-widest mb-2 animate-pulse">ZETTBOS</div>
+        <div class="text-gray-400 text-xs tracking-[0.3em] mb-4">SYSTEM INITIALIZING</div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+    </div>
 
     <!-- NAVIGATION -->
-    <nav class="fixed w-full z-50 glass-card border-b border-gray-800">
+    <nav class="fixed w-full z-50 glass-card border-b border-gray-800 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <!-- LOGO & BRAND NAME -->
             <a href="#" class="flex items-center gap-3 group">
@@ -147,14 +219,16 @@
                 <span class="font-brand text-2xl font-bold tracking-wide text-white group-hover:text-primary transition duration-300">ZETTBOS</span>
             </a>
 
-            <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+            <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-400">
                 <a href="#masalah" class="hover:text-primary transition">Tantangan</a>
                 <a href="#ai-consultant" class="hover:text-primary transition text-primary font-bold">✨ AI Check</a>
                 <a href="#solusi" class="hover:text-primary transition">Solusi</a>
                 <a href="#projek" class="hover:text-primary transition">Portofolio</a> 
+                <a href="#why-zettbos" class="hover:text-primary transition">Kenapa Zettbos</a> 
                 <a href="#harga" class="hover:text-primary transition">Harga</a> 
+                <a href="#testimoni" class="hover:text-primary transition">Klien</a>
             </div>
-            <a href="#kontak" class="hidden md:inline-block bg-white text-dark px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition">
+            <a href="#kontak" class="hidden md:inline-block bg-white text-dark px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition transform hover:scale-105">
                 Jadwalkan Konsultasi
             </a>
             <button class="md:hidden text-white"><i data-lucide="menu"></i></button>
@@ -163,17 +237,22 @@
 
     <!-- HERO SECTION -->
     <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- 2. PARTICLE NETWORK BACKGROUND -->
+        <canvas id="particles-canvas"></canvas>
+        
+        <!-- Background Gradient Glow -->
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] -z-10"></div>
 
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center px-3 py-1 rounded-full border border-gray-700 bg-gray-900/50 mb-6" data-aos="fade-down">
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <div class="inline-flex items-center px-3 py-1 rounded-full border border-gray-700 bg-gray-900/50 mb-6 backdrop-blur-md" data-aos="fade-down">
                 <span class="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
                 <span class="text-xs text-gray-300 tracking-wide uppercase font-semibold">Membangun Sistem Kerja Otomatis dari Excel & Google Sheets</span>
             </div>
             
-            <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6" data-aos="fade-up" data-aos-delay="100">
-                Jika Pekerjaan Bisa Diotomatisasi, <br>
-                <span class="gradient-text">Tidak Perlu Dikerjakan Secara Manual.</span>
+            <!-- 3. TYPING EFFECT HEADLINE -->
+            <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 h-[160px] md:h-auto" data-aos="fade-up" data-aos-delay="100">
+                Membangun <br>
+                <span class="gradient-text typing-cursor" id="typing-text"></span>
             </h1>
             
             <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="200">
@@ -181,36 +260,41 @@
             </p>
             
             <div class="flex flex-col md:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="300">
-                <a href="#kontak" class="bg-primary hover:bg-sky-400 text-darker px-8 py-4 rounded-full font-bold text-lg transition cta-glow flex items-center justify-center gap-2">
+                <a href="#kontak" class="bg-primary hover:bg-sky-400 text-darker px-8 py-4 rounded-full font-bold text-lg transition cta-glow flex items-center justify-center gap-2 transform hover:scale-105">
                     Konsultasi Sistem <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </a>
-                <a href="#solusi" class="glass-card text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition">
+                <a href="#solusi" class="glass-card text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition transform hover:scale-105">
                     Pelajari Solusi Kami
                 </a>
             </div>
 
-            <!-- Social Proof / Statistik -->
+            <!-- 6. ANIMATED COUNTERS -->
             <div class="mt-16 border-t border-gray-800 pt-8" data-aos="fade-in" data-aos-delay="500">
                 <p class="text-sm text-gray-500 mb-6 uppercase tracking-wider font-semibold">TRACK RECORD KAMI</p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 justify-center items-center text-center">
                     <!-- Stat 1 -->
                     <div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1">35+</h3>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1 counter" data-target="35">0</h3>
+                        <span class="text-2xl font-bold text-white relative -top-1">+</span>
                         <p class="text-sm text-gray-400">Proyek Terselesaikan</p>
                     </div>
                     <!-- Stat 2 -->
                     <div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1">99%</h3>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1 counter" data-target="99">0</h3>
+                        <span class="text-2xl font-bold text-white relative -top-1">%</span>
                         <p class="text-sm text-gray-400">Lebih Hemat Waktu</p>
                     </div>
                     <!-- Stat 3 -->
                     <div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1">13rb+</h3>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1 counter" data-target="13">0</h3>
+                        <span class="text-2xl font-bold text-white relative -top-1">rb+</span>
                         <p class="text-sm text-gray-400">Followers TikTok</p>
                     </div>
                     <!-- Stat 4 -->
                     <div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1">&lt;7 Hari</h3>
+                        <span class="text-2xl font-bold text-white relative -top-1">&lt;</span>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-1 counter" data-target="7">0</h3>
+                        <span class="text-2xl font-bold text-white relative -top-1">Hari</span>
                         <p class="text-sm text-gray-400">Rata-rata Pengerjaan</p>
                     </div>
                 </div>
@@ -227,12 +311,11 @@
         <!-- Container Slider -->
         <div id="logo-slider" class="w-full overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing select-none py-6">
             <div id="logo-track" class="w-max flex items-center">
-                <!-- LOGO ITEMS -->
+                <!-- LOGO ITEMS (Will be duplicated by JS) -->
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/Pertamina.png" alt="Pertamina" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/united tractor.png" alt="United Tractors" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/bsi.png" alt="BSI" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/Monash_University_logo.png" alt="Monash University" class="client-logo"></div></div>
-                <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/ars2.png" alt="Rumah Sakit" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/bosnet.png" alt="Bosnet" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/bina artha.png" alt="Bina Artha" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/tbglobal.png" alt="TB Global" class="client-logo"></div></div>
@@ -240,6 +323,7 @@
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/forever.png" alt="Forever" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/tarunaakademia.png" alt="Taruna Akademia" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/rs1.png" alt="Rumah Sakit" class="client-logo"></div></div>
+                <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/ars2.png" alt="Rumah Sakit" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/logo ssb transparant.png" alt="SSB" class="client-logo"></div></div>
                 <div class="logo-item"><div class="logo-glass"><img src="CLIENTS LOGO/logo journey putih.png" alt="Journey" class="client-logo"></div></div>
             </div>
@@ -248,22 +332,18 @@
         <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-darker to-transparent pointer-events-none md:hidden"></div>
     </section>
 
-    <!-- NEW SECTION: AI CONSULTANT (GEMINI INTEGRATION) -->
+    <!-- NEW SECTION: AI CONSULTANT -->
     <section id="ai-consultant" class="py-20 relative overflow-hidden bg-gradient-to-b from-dark to-card/50">
-        <!-- Glow Effect -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -z-10"></div>
-
-        <div class="max-w-4xl mx-auto px-6">
+        <div class="max-w-4xl mx-auto px-6" data-aos="fade-up">
             <div class="text-center mb-10">
                 <span class="inline-block py-1 px-3 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-4 ai-glow">✨ POWERED BY ZETTBOS AI</span>
                 <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Cek Kesehatan Sistem Bisnis Anda</h2>
                 <p class="text-gray-400">Bingung mulai dari mana? Ceritakan masalah operasional Anda di bawah ini, dan AI Zettbos akan memberikan rekomendasi solusi teknis instan.</p>
             </div>
 
-            <div class="glass-card p-1 rounded-2xl border border-primary/20 shadow-2xl shadow-primary/5">
+            <div class="glass-card p-1 rounded-2xl border border-primary/20 shadow-2xl shadow-primary/5 tilt-card">
                 <div class="bg-darker/80 backdrop-blur-xl rounded-xl p-6 md:p-8">
-                    
-                    <!-- Chat Area -->
                     <div class="flex flex-col gap-4">
                         <label for="userProblem" class="text-sm font-semibold text-gray-300">Apa masalah operasional yang paling bikin pusing saat ini?</label>
                         <textarea 
@@ -282,8 +362,6 @@
                             <i data-lucide="sparkles" class="w-4 h-4"></i>
                         </button>
                     </div>
-
-                    <!-- Result Area (Hidden by Default) -->
                     <div id="ai-result-container" class="hidden mt-8 pt-8 border-t border-gray-800">
                         <div class="flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg">
@@ -291,9 +369,7 @@
                             </div>
                             <div class="flex-1">
                                 <h4 class="text-primary font-bold mb-2 text-lg">Rekomendasi Zettbos AI:</h4>
-                                <div id="ai-response-text" class="text-gray-300 text-sm leading-relaxed prose prose-invert max-w-none">
-                                    <!-- AI Response will appear here -->
-                                </div>
+                                <div id="ai-response-text" class="text-gray-300 text-sm leading-relaxed prose prose-invert max-w-none"></div>
                                 <div class="mt-4 p-3 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-between gap-4">
                                     <span class="text-xs text-primary font-semibold">Butuh bantuan mewujudkan solusi ini?</span>
                                     <a href="#kontak" class="text-xs bg-primary text-darker px-3 py-1.5 rounded font-bold hover:bg-white transition">Konsultasi Tim Zettbos</a>
@@ -301,50 +377,44 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Loading State -->
                     <div id="ai-loading" class="hidden mt-8 text-center py-4">
                         <div class="inline-flex items-center gap-2 text-gray-400 animate-pulse">
                             <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
                             <span class="text-sm">Sedang menganalisa alur kerja Anda...</span>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PAIN POINTS (UPDATED CONTENT) -->
+    <!-- PAIN POINTS -->
     <section id="masalah" class="py-20 bg-darker">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
-                <!-- UPDATE: Title -->
                 <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Tanda Sistem Kerja Anda Masih Terjebak Proses Manual</h2>
                 <p class="text-gray-400">Apabila Anda menghadapi kendala berikut, sistem manual saat ini mungkin menghambat pertumbuhan bisnis Anda.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group" data-aos="fade-up">
+                <!-- 2. 3D TILT EFFECT ON CARDS -->
+                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group glass-card tilt-card" data-aos="fade-up">
                     <div class="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6 text-red-500">
-                        <i data-lucide="clock"></i> <!-- Icon: Clock/History -->
+                        <i data-lucide="clock"></i> 
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-white">Keputusan Bisnis Selalu Terlambat</h3>
                     <p class="text-gray-400 text-sm">Keputusan strategis sering diambil berdasarkan data yang sudah tidak relevan karena laporan keuangan dan operasional baru tersedia setelah proses rekap manual yang panjang dan berulang.</p>
                 </div>
-                <!-- Card 2 -->
-                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group glass-card tilt-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6 text-red-500">
-                        <i data-lucide="repeat"></i> <!-- Icon: Repeat -->
+                        <i data-lucide="repeat"></i> 
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-white">Tim Terjebak Pekerjaan Repetitif</h3>
                     <p class="text-gray-400 text-sm">Waktu kerja tim habis untuk aktivitas berulang seperti input, penyalinan, dan pengecekan data, sehingga fokus pada analisis dan pengambilan keputusan menjadi terbatas.</p>
                 </div>
-                <!-- Card 3 -->
-                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-8 rounded-2xl bg-gray-900/50 border border-red-900/30 hover:border-red-500/50 transition group glass-card tilt-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6 text-red-500">
-                        <i data-lucide="users"></i> <!-- Icon: Users/Personel -->
+                        <i data-lucide="users"></i> 
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-white">Ketergantungan pada Individu, Bukan Sistem</h3>
                     <p class="text-gray-400 text-sm">Alur kerja dan pengetahuan operasional bergantung pada individu tertentu, sehingga proses bisnis menjadi rentan ketika terjadi pergantian personel atau ketidakhadiran staf kunci.</p>
@@ -353,20 +423,16 @@
         </div>
     </section>
 
-    <!-- SOLUTION (UPDATED CONTENT) -->
+    <!-- SOLUTION -->
     <section id="solusi" class="py-20 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="md:flex items-center gap-12">
-                <!-- Left Column (Text & Bullets) -->
                 <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
-                    <!-- UPDATE: Headline -->
                     <h2 class="font-display text-4xl font-bold mb-6">Bukan Sekadar Excel.<br><span class="gradient-text">Ini Tentang Sistem Kerja Bisnis Anda.</span></h2>
-                    <!-- UPDATE: Description -->
                     <p class="text-gray-400 mb-6 leading-relaxed">
                         Zettbos membantu bisnis yang sudah menggunakan Excel dan Google Sheets untuk beralih dari proses manual yang berulang menjadi sistem kerja otomatis yang terstruktur, terkontrol, dan siap digunakan dalam operasional harian.
                     </p>
                     <ul class="space-y-6">
-                        <!-- Bullet 1 (Updated Text) -->
                         <li class="flex items-start gap-4">
                             <div class="bg-primary/20 p-2 rounded-lg text-primary mt-1"><i data-lucide="database"></i></div>
                             <div>
@@ -374,7 +440,6 @@
                                 <span class="text-sm text-gray-400">Seluruh data operasional dan keuangan disatukan dalam satu sistem terpusat, sehingga tim tidak lagi bekerja dengan banyak versi file atau data yang saling bertentangan.</span>
                             </div>
                         </li>
-                        <!-- Bullet 2 (Updated Text & Icon to 'bot') -->
                         <li class="flex items-start gap-4">
                             <div class="bg-primary/20 p-2 rounded-lg text-primary mt-1"><i data-lucide="bot"></i></div>
                             <div>
@@ -382,7 +447,6 @@
                                 <span class="text-sm text-gray-400">Proses rutin seperti penagihan dan pengingat pembayaran berjalan otomatis tanpa perlu input manual berulang, sehingga tim dapat fokus pada pekerjaan yang lebih bernilai.</span>
                             </div>
                         </li>
-                        <!-- Bullet 3 (Updated Text & Icon to 'shield-check') -->
                         <li class="flex items-start gap-4">
                             <div class="bg-primary/20 p-2 rounded-lg text-primary mt-1"><i data-lucide="shield-check"></i></div>
                             <div>
@@ -393,16 +457,12 @@
                     </ul>
                 </div>
                 
-                <!-- Card Visuals (Right Column - Unchanged) -->
                 <div class="md:w-1/2" data-aos="fade-left">
                     <div class="space-y-6 relative">
-                        <!-- Card Before (Cara Lama) -->
-                        <div class="bg-darker border border-red-900/30 p-6 rounded-xl relative hover:border-red-500/30 transition duration-300">
+                        <div class="bg-darker border border-red-900/30 p-6 rounded-xl relative hover:border-red-500/30 transition duration-300 tilt-card">
                             <div class="absolute top-4 right-4 text-red-500 bg-red-500/10 px-3 py-1 rounded-full text-xs font-bold tracking-wider">CARA LAMA</div>
                             <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center flex-shrink-0 border border-red-500/20">
-                                    <i data-lucide="x" class="text-red-500 w-5 h-5"></i>
-                                </div>
+                                <div class="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center flex-shrink-0 border border-red-500/20"><i data-lucide="x" class="text-red-500 w-5 h-5"></i></div>
                                 <div>
                                     <h4 class="text-gray-200 font-bold mb-2">Manual & Berisiko</h4>
                                     <ul class="space-y-2 text-sm text-gray-500">
@@ -414,20 +474,14 @@
                             </div>
                         </div>
 
-                        <!-- Arrow Transformation -->
                         <div class="flex justify-center md:block md:ml-[2.75rem] md:-translate-x-1/2 -my-3 relative z-10 w-fit">
-                            <div class="bg-card border border-gray-700 p-1.5 rounded-full">
-                                <i data-lucide="arrow-down" class="text-gray-400 w-5 h-5"></i>
-                            </div>
+                            <div class="bg-card border border-gray-700 p-1.5 rounded-full"><i data-lucide="arrow-down" class="text-gray-400 w-5 h-5"></i></div>
                         </div>
 
-                        <!-- Card After (Cara Zettbos) -->
-                        <div class="bg-primary/5 border border-primary/30 p-6 rounded-xl relative hover:border-primary/50 transition duration-300 shadow-lg shadow-primary/5">
+                        <div class="bg-primary/5 border border-primary/30 p-6 rounded-xl relative hover:border-primary/50 transition duration-300 shadow-lg shadow-primary/5 tilt-card">
                             <div class="absolute top-4 right-4 text-primary bg-primary/10 px-3 py-1 rounded-full text-xs font-bold tracking-wider">HASIL ZETTBOS</div>
                             <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 border border-primary/30">
-                                    <i data-lucide="check" class="text-primary w-5 h-5"></i>
-                                </div>
+                                <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 border border-primary/30"><i data-lucide="check" class="text-primary w-5 h-5"></i></div>
                                 <div>
                                     <h4 class="text-white font-bold mb-2">Otomatis & Terkontrol</h4>
                                     <ul class="space-y-2 text-sm text-gray-300">
@@ -444,7 +498,7 @@
         </div>
     </section>
 
-    <!-- NEW SECTION: PROJECTS (PORTOFOLIO) -->
+    <!-- PROJECT HIGHLIGHTS -->
     <section id="projek" class="py-20 bg-darker/30 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
@@ -454,7 +508,7 @@
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Project 1 -->
-                <div class="glass-card p-8 rounded-2xl group hover:border-primary/50 transition duration-300">
+                <div class="glass-card p-8 rounded-2xl group hover:border-primary/50 transition duration-300 tilt-card">
                     <div class="flex items-center gap-4 mb-6">
                         <div class="p-3 bg-blue-500/20 rounded-lg text-blue-400"><i data-lucide="file-spreadsheet" class="w-8 h-8"></i></div>
                         <div>
@@ -469,7 +523,7 @@
                     </div>
                 </div>
                 <!-- Project 2 -->
-                <div class="glass-card p-8 rounded-2xl group hover:border-green-500/50 transition duration-300">
+                <div class="glass-card p-8 rounded-2xl group hover:border-green-500/50 transition duration-300 tilt-card">
                     <div class="flex items-center gap-4 mb-6">
                         <div class="p-3 bg-green-500/20 rounded-lg text-green-400"><i data-lucide="message-circle" class="w-8 h-8"></i></div>
                         <div>
@@ -484,7 +538,7 @@
                     </div>
                 </div>
                 <!-- Project 3 -->
-                <div class="glass-card p-8 rounded-2xl group hover:border-yellow-500/50 transition duration-300">
+                <div class="glass-card p-8 rounded-2xl group hover:border-yellow-500/50 transition duration-300 tilt-card">
                     <div class="flex items-center gap-4 mb-6">
                         <div class="p-3 bg-yellow-500/20 rounded-lg text-yellow-400"><i data-lucide="layout-dashboard" class="w-8 h-8"></i></div>
                         <div>
@@ -499,7 +553,7 @@
                     </div>
                 </div>
                 <!-- Project 4 -->
-                <div class="glass-card p-8 rounded-2xl group hover:border-purple-500/50 transition duration-300">
+                <div class="glass-card p-8 rounded-2xl group hover:border-purple-500/50 transition duration-300 tilt-card">
                     <div class="flex items-center gap-4 mb-6">
                         <div class="p-3 bg-purple-500/20 rounded-lg text-purple-400"><i data-lucide="smartphone" class="w-8 h-8"></i></div>
                         <div>
@@ -515,17 +569,59 @@
                 </div>
             </div>
 
-            <!-- ADDED BUTTON: LINK TO SPREADSHEET -->
             <div class="mt-12 text-center" data-aos="fade-up">
                 <a href="https://docs.google.com/spreadsheets/d/1_Jg0WfyvbKoSzPOnNav2_c8f8K7zFE2c78rkCbKgZ-Y/edit?gid=0#gid=0" 
                    target="_blank" 
                    class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4 rounded-full transition-all hover:scale-105 group">
-                    <div class="bg-green-500/20 p-2 rounded-full">
-                        <i data-lucide="sheet" class="w-5 h-5 text-green-400"></i>
-                    </div>
+                    <div class="bg-green-500/20 p-2 rounded-full"><i data-lucide="sheet" class="w-5 h-5 text-green-400"></i></div>
                     <span class="font-semibold tracking-wide">Lihat Database Proyek Lengkap (Live Update)</span>
                     <i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"></i>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: WHY ZETTBOS -->
+    <section id="why-zettbos" class="py-20 bg-dark relative">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Mengapa Zettbos?</h2>
+                <p class="text-gray-400">Alternatif strategis dibanding ERP Konvensional.</p>
+            </div>
+            <div class="glass-card p-1 rounded-2xl border border-primary/20 overflow-hidden tilt-card">
+                <div class="bg-card/50 backdrop-blur-md rounded-xl overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-gray-700 text-sm uppercase tracking-wider">
+                                <th class="p-6 text-white font-bold w-1/4">Aspek</th>
+                                <th class="p-6 text-gray-400 font-semibold w-1/3">Software ERP / SaaS</th>
+                                <th class="p-6 text-primary font-bold w-1/3 bg-primary/5">Pendekatan Zettbos</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm md:text-base">
+                            <tr class="border-b border-gray-700/50 hover:bg-white/5 transition">
+                                <td class="p-6 font-bold text-white">Kepemilikan</td>
+                                <td class="p-6 text-gray-400">Sewa (Berhenti = Data Hilang)</td>
+                                <td class="p-6 text-white font-semibold bg-primary/5 border-l border-primary/10">Milik Anda Sepenuhnya</td>
+                            </tr>
+                            <tr class="border-b border-gray-700/50 hover:bg-white/5 transition">
+                                <td class="p-6 font-bold text-white">Fleksibilitas</td>
+                                <td class="p-6 text-gray-400">Kaku (One-size-fits-all)</td>
+                                <td class="p-6 text-white font-semibold bg-primary/5 border-l border-primary/10">Tailor-made (Sesuai Bisnis)</td>
+                            </tr>
+                            <tr class="border-b border-gray-700/50 hover:bg-white/5 transition">
+                                <td class="p-6 font-bold text-white">Biaya</td>
+                                <td class="p-6 text-gray-400">Langganan Rutin (OpEx)</td>
+                                <td class="p-6 text-white font-semibold bg-primary/5 border-l border-primary/10">Investasi Awal (CapEx)</td>
+                            </tr>
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="p-6 font-bold text-white">Adaptasi</td>
+                                <td class="p-6 text-gray-400">Butuh Training Panjang</td>
+                                <td class="p-6 text-white font-semibold bg-primary/5 border-l border-primary/10">Familier (Interface Excel)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
@@ -539,8 +635,8 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Paket Basic -->
-                <div class="glass-card p-8 rounded-2xl border-t-4 border-gray-500 flex flex-col relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                <!-- Basic -->
+                <div class="glass-card p-8 rounded-2xl border-t-4 border-gray-500 flex flex-col relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 tilt-card">
                     <div class="mb-4">
                         <h3 class="text-2xl font-bold text-white font-display">Basic</h3>
                         <p class="text-sm text-gray-400 mt-2">Untuk Kebutuhan Individu</p>
@@ -558,8 +654,8 @@
                     <a href="#kontak" class="w-full py-3 rounded-lg border border-gray-600 text-white font-bold text-center hover:bg-gray-700 transition">Pilih Basic</a>
                 </div>
 
-                <!-- Paket Standard -->
-                <div class="glass-card p-8 rounded-2xl border-t-4 border-primary flex flex-col relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 bg-gray-800/30">
+                <!-- Standard -->
+                <div class="glass-card p-8 rounded-2xl border-t-4 border-primary flex flex-col relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 bg-gray-800/30 tilt-card">
                     <div class="absolute top-0 right-0 bg-primary text-darker text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
                     <div class="mb-4">
                         <h3 class="text-2xl font-bold text-white font-display">Standard</h3>
@@ -578,8 +674,8 @@
                     <a href="#kontak" class="w-full py-3 rounded-lg bg-primary text-darker font-bold text-center hover:bg-sky-400 transition shadow-lg shadow-primary/20">Pilih Standard</a>
                 </div>
 
-                <!-- Paket Premium -->
-                <div class="glass-card p-8 rounded-2xl border-t-4 border-accent flex flex-col relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                <!-- Premium -->
+                <div class="glass-card p-8 rounded-2xl border-t-4 border-accent flex flex-col relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 tilt-card">
                     <div class="mb-4">
                         <h3 class="text-2xl font-bold text-white font-display">Premium</h3>
                         <p class="text-sm text-gray-400 mt-2">Untuk Perusahaan Besar</p>
@@ -857,17 +953,216 @@
             }
         }
 
+        // Particle Network Logic
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        // Create particles
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            // Draw particle
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            // Update particle position
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            const numberOfParticles = (canvas.width * canvas.height) / 15000; 
+            for (let i = 0; i < numberOfParticles; i++) {
+                const size = (Math.random() * 2) + 1;
+                const x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                const y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                const directionX = (Math.random() * 0.4) - 0.2;
+                const directionY = (Math.random() * 0.4) - 0.2;
+                const color = '#38bdf8'; 
+
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    const distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        // Initialize particles
+        init();
+        animate();
+
+
+        // Typing Effect Logic
+        const textElement = document.getElementById('typing-text');
+        const phrases = ["Sistem Kerja Otomatis", "Bisnis yang Lebih Terkontrol", "Data Operasional Akurat"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 50; 
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typeSpeed = 2000; // Pause at end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500; // Pause before next word
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        // Start typing effect
+        type();
+
+        // 3D Tilt Effect Logic (Lightweight)
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+
+        // Animated Counters Logic
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; // The lower the slower
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    
+                    // Lower increment to slow and higher to fast
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        // Add inc to count and output in counter
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Trigger counters when in viewport
+        const counterSection = document.querySelector('.mt-16'); // The section containing counters
+        if(counterSection) {
+            const observer = new IntersectionObserver((entries) => {
+                if(entries[0].isIntersecting) {
+                    animateCounters();
+                    observer.disconnect(); // Run once
+                }
+            });
+            observer.observe(counterSection);
+        }
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+             const preloader = document.getElementById('preloader');
+             setTimeout(() => {
+                 preloader.style.opacity = '0';
+                 preloader.style.visibility = 'hidden';
+                 
+                 // Init AOS after preloader
+                 AOS.init({
+                    duration: 800,
+                    once: true,
+                    offset: 50
+                });
+             }, 2000); // 2s delay
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             // Init Icons
             lucide.createIcons();
             
-            // Init Animation (AOS) - Dipastikan berjalan setelah DOM ready
-            AOS.init({
-                duration: 800,
-                once: true,
-                offset: 50
-            });
-
             // --- SCRIPT UNTUK FAQ TOGGLE ---
             const toggleBtn = document.getElementById('faq-toggle-btn');
             const hiddenFaq = document.getElementById('faq-hidden-content');
