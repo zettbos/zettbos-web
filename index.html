@@ -163,10 +163,10 @@
             padding: 0 15px; 
         }
 
-        /* Glass Container untuk Logo */
+        /* Glass Container untuk Logo - REVERTED TO WHITE FILL */
         .logo-glass {
-            background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid rgba(0, 255, 132, 0.1); /* Green tint border */
+            background: rgba(255, 255, 255, 0.1); /* Back to White Transparent */
+            border: 1px solid rgba(0, 255, 132, 0.3); /* Green tint border kept */
             backdrop-filter: blur(8px);
             border-radius: 12px;
             padding: 1rem;
@@ -178,12 +178,12 @@
             transition: all 0.3s ease;
         }
 
-        /* HOVER EFFECT */
+        /* HOVER EFFECT - REVERTED TO WHITE FILL */
         .logo-glass:hover {
-            background: rgba(0, 255, 132, 0.1); 
-            border-color: #00ff84; 
+            background: rgba(255, 255, 255, 0.75); /* Back to White Solid on Hover */
+            border-color: #00ff84; /* Green Border */
             transform: translateY(-5px) scale(1.02); 
-            box-shadow: 0 0 20px rgba(0, 255, 132, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 132, 0.4); /* Green Glow */
         }
 
         @media (min-width: 768px) {
@@ -314,7 +314,7 @@
                 <a href="#tim" class="hover:text-primary transition">Tim</a>
                 <a href="#harga" class="hover:text-primary transition">Harga</a> 
             </div>
-            <a href="#kontak" class="hidden md:inline-block bg-primary text-darker font-extrabold px-5 py-2 rounded-full text-sm hover:bg-white hover:shadow-[0_0_15px_#00ff84] transition transform hover:scale-105">
+            <a href="#kontak" class="hidden md:inline-block bg-white text-dark px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition transform hover:scale-105 border border-transparent hover:border-primary">
                 Jadwalkan Konsultasi
             </a>
             <button class="md:hidden text-white"><i data-lucide="menu"></i></button>
@@ -343,7 +343,7 @@
             </p>
             
             <div class="flex flex-col md:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="300">
-                <a href="#kontak" class="bg-primary hover:bg-white text-darker font-extrabold px-8 py-4 rounded-full text-lg transition cta-glow flex items-center justify-center gap-2 transform hover:scale-105">
+                <a href="#kontak" class="bg-white hover:bg-gray-200 text-darker font-extrabold px-8 py-4 rounded-full text-lg transition cta-glow flex items-center justify-center gap-2 transform hover:scale-105 border-2 border-transparent hover:border-primary">
                     Konsultasi Sistem <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </a>
                 <a href="#solusi" class="glass-card text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition transform hover:scale-105">
