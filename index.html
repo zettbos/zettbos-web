@@ -30,9 +30,9 @@
                         dark: '#0B0F19',
                         darker: '#050912',
                         card: '#111827',
-                        primary: '#38bdf8', // Cyan Biru Muda
-                        secondary: '#818cf8', // Ungu Muda
-                        accent: '#10b981', // Hijau untuk harga
+                        primary: '#00ff84', // NEON GREEN
+                        secondary: '#ccff00', // LIME STABILO
+                        accent: '#ccff00', // LIME STABILO (Highlight)
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -76,21 +76,21 @@
         }
 
         .loader-bar {
-            width: 200px; /* Ukuran kompak sesuai request */
+            width: 200px; 
             height: 3px;
-            background: rgba(56, 189, 248, 0.2);
+            background: rgba(0, 255, 132, 0.2); /* Updated RGBA to Green */
             border-radius: 4px;
             overflow: hidden;
-            margin-top: 1.5rem; /* Jarak dari teks */
+            margin-top: 1.5rem; 
             position: relative;
         }
         
         .loader-progress {
-            width: 0%; /* Start from 0 controlled by JS */
+            width: 0%; 
             height: 100%;
-            background: #38bdf8;
-            box-shadow: 0 0 10px #38bdf8;
-            transition: width 0.5s ease-out; /* Smooth transition for JS width changes */
+            background: #00ff84; /* Updated to Neon Green */
+            box-shadow: 0 0 15px #00ff84; /* Stronger Glow */
+            transition: width 0.5s ease-out; 
         }
 
         /* Particle Canvas - Fixed Position */
@@ -116,34 +116,34 @@
         }
 
         .gradient-text {
-            background: linear-gradient(to right, #38bdf8, #818cf8);
+            background: linear-gradient(to right, #00ff84, #ccff00); /* Neon Green to Lime */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .glass-card {
             background: rgba(17, 24, 39, 0.6);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 255, 132, 0.1); /* Slight green border hint */
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            /* Removed preserve-3d to disable heavy 3D calculations */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        /* NEW: Simple Pop Up Hover Effect */
+        /* NEW: Simple Pop Up Hover Effect with Neon Glow */
         .glass-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px -10px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 15px 40px -10px rgba(0, 255, 132, 0.25); /* Neon Green Shadow */
+            border-color: rgba(0, 255, 132, 0.4);
         }
 
         .cta-glow {
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 25px rgba(0, 255, 132, 0.4); /* Stronger Green Glow */
         }
         
         /* Cursor Typing */
         .typing-cursor::after {
             content: '|';
             animation: blink 1s step-end infinite;
-            color: #38bdf8;
+            color: #00ff84; /* Neon Green */
         }
 
         /* --- STYLE LOGO --- */
@@ -165,8 +165,8 @@
 
         /* Glass Container untuk Logo */
         .logo-glass {
-            background: rgba(255, 255, 255, 0.1); 
-            border: 1px solid rgba(255, 255, 255, 0.15); 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(0, 255, 132, 0.1); /* Green tint border */
             backdrop-filter: blur(8px);
             border-radius: 12px;
             padding: 1rem;
@@ -180,10 +180,10 @@
 
         /* HOVER EFFECT */
         .logo-glass:hover {
-            background: rgba(255, 255, 255, 0.75); 
-            border-color: #fff; 
+            background: rgba(0, 255, 132, 0.1); 
+            border-color: #00ff84; 
             transform: translateY(-5px) scale(1.02); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 132, 0.2);
         }
 
         @media (min-width: 768px) {
@@ -202,19 +202,19 @@
 
         /* AI Chat Bubble Animation */
         @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 10px rgba(56, 189, 248, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
+            0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 132, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(0, 255, 132, 0.6); }
         }
         .ai-glow { animation: pulse-glow 2s infinite; }
 
-        /* NEW: Light Pulse Animation for Header Text */
+        /* NEW: Light Pulse Animation for Header Text - Updated for Neon */
         @keyframes light-pulse {
             0%, 100% { 
                 text-shadow: 0 0 2px rgba(255, 255, 255, 0.1); 
-                color: #d1d5db; /* gray-300 */
+                color: #d1d5db; 
             }
             50% { 
-                text-shadow: 0 0 15px rgba(56, 189, 248, 0.8), 0 0 5px rgba(255, 255, 255, 0.5); 
+                text-shadow: 0 0 20px rgba(0, 255, 132, 0.8), 0 0 10px rgba(204, 255, 0, 0.5); 
                 color: #ffffff;
             }
         }
@@ -223,10 +223,10 @@
         }
 
         /* Markdown Styles for AI Response */
-        .prose strong { color: #38bdf8; font-weight: 700; }
+        .prose strong { color: #00ff84; font-weight: 700; }
         .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }
         .prose p { margin-bottom: 0.5rem; }
-        .prose code { background: #1e293b; padding: 2px 6px; border-radius: 4px; color: #a5f3fc; font-family: 'JetBrains Mono', monospace; }
+        .prose code { background: #1e293b; padding: 2px 6px; border-radius: 4px; color: #ccff00; font-family: 'JetBrains Mono', monospace; }
 
         /* FAQ Accordion Style */
         details > summary { list-style: none; }
@@ -235,8 +235,8 @@
         /* Custom Scrollbar Website */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0B0F19; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+        ::-webkit-scrollbar-thumb { background: #11221c; border-radius: 4px; border: 1px solid #004d2a; }
+        ::-webkit-scrollbar-thumb:hover { background: #00ff84; }
 
         /* Tabs Style */
         .tab-btn {
@@ -259,8 +259,8 @@
         }
         .calc-input:focus {
             outline: none;
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+            border-color: #00ff84;
+            box-shadow: 0 0 0 2px rgba(0, 255, 132, 0.2);
         }
 
         /* Modal Image Styling */
@@ -268,7 +268,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 0.75rem;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(0, 255, 132, 0.2);
         }
         .modal-img-container img {
             width: 100%;
@@ -314,7 +314,7 @@
                 <a href="#tim" class="hover:text-primary transition">Tim</a>
                 <a href="#harga" class="hover:text-primary transition">Harga</a> 
             </div>
-            <a href="#kontak" class="hidden md:inline-block bg-white text-dark px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition transform hover:scale-105">
+            <a href="#kontak" class="hidden md:inline-block bg-primary text-darker font-extrabold px-5 py-2 rounded-full text-sm hover:bg-white hover:shadow-[0_0_15px_#00ff84] transition transform hover:scale-105">
                 Jadwalkan Konsultasi
             </a>
             <button class="md:hidden text-white"><i data-lucide="menu"></i></button>
@@ -328,7 +328,7 @@
         <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
             <!-- REVISI TEKS -->
             <div class="inline-flex items-center px-3 py-1 rounded-full border border-gray-700 bg-gray-900/50 mb-6 backdrop-blur-md" data-aos="fade-down">
-                <span class="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
+                <span class="w-2 h-2 rounded-full bg-primary mr-2 animate-pulse"></span>
                 <!-- Added animate-light-pulse here -->
                 <span class="text-xs tracking-wide uppercase font-semibold animate-light-pulse">Zettbos | Workflow Automation Solutions</span>
             </div>
@@ -343,7 +343,7 @@
             </p>
             
             <div class="flex flex-col md:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="300">
-                <a href="#kontak" class="bg-primary hover:bg-sky-400 text-darker px-8 py-4 rounded-full font-bold text-lg transition cta-glow flex items-center justify-center gap-2 transform hover:scale-105">
+                <a href="#kontak" class="bg-primary hover:bg-white text-darker font-extrabold px-8 py-4 rounded-full text-lg transition cta-glow flex items-center justify-center gap-2 transform hover:scale-105">
                     Konsultasi Sistem <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </a>
                 <a href="#solusi" class="glass-card text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition transform hover:scale-105">
@@ -359,7 +359,7 @@
                     <div>
                         <div class="flex justify-center items-baseline gap-1">
                             <h3 class="text-3xl md:text-4xl font-bold text-white mb-1 counter" data-target="35">0</h3>
-                            <span class="text-2xl font-bold text-white">+</span>
+                            <span class="text-2xl font-bold text-primary">+</span>
                         </div>
                         <p class="text-sm text-gray-400">Proyek Terselesaikan</p>
                     </div>
@@ -367,9 +367,9 @@
                     <!-- Item 2: ±98% -->
                     <div>
                         <div class="flex justify-center items-baseline gap-1">
-                            <span class="text-2xl font-bold text-white">±</span>
+                            <span class="text-2xl font-bold text-primary">±</span>
                             <h3 class="text-3xl md:text-4xl font-bold text-white mb-1 counter" data-target="98">0</h3>
-                            <span class="text-2xl font-bold text-white">%</span>
+                            <span class="text-2xl font-bold text-primary">%</span>
                         </div>
                         <p class="text-sm text-gray-400">Lebih Hemat Waktu</p>
                     </div>
@@ -378,7 +378,7 @@
                     <div>
                         <div class="flex justify-center items-baseline gap-1">
                             <h3 class="text-3xl md:text-4xl font-bold text-white mb-1 counter" data-target="13">0</h3>
-                            <span class="text-2xl font-bold text-white">rb+</span>
+                            <span class="text-2xl font-bold text-primary">rb+</span>
                         </div>
                         <p class="text-sm text-gray-400">Followers TikTok</p>
                     </div>
@@ -386,9 +386,9 @@
                     <!-- Item 4: < 7 Hari -->
                     <div>
                         <div class="flex justify-center items-baseline gap-1">
-                            <span class="text-2xl font-bold text-white">&lt;</span>
+                            <span class="text-2xl font-bold text-primary">&lt;</span>
                             <h3 class="text-3xl md:text-4xl font-bold text-white mb-1 counter" data-target="7">0</h3>
-                            <span class="text-2xl font-bold text-white">Hari</span>
+                            <span class="text-2xl font-bold text-primary">Hari</span>
                         </div>
                         <p class="text-sm text-gray-400">Rata-rata Pengerjaan</p>
                     </div>
@@ -687,7 +687,7 @@
                         <i data-lucide="eye" class="w-4 h-4"></i> View
                     </div>
                     <div class="flex items-center gap-4 mb-6">
-                        <div class="p-3 bg-blue-500/20 rounded-lg text-blue-400"><i data-lucide="file-spreadsheet" class="w-8 h-8"></i></div>
+                        <div class="p-3 bg-primary/20 rounded-lg text-primary"><i data-lucide="file-spreadsheet" class="w-8 h-8"></i></div>
                         <div>
                             <h3 class="text-xl font-bold text-white">Automated Data Processing</h3>
                             <p class="text-sm text-gray-400">Integrasi Accurate & Laporan Keuangan</p>
@@ -701,12 +701,12 @@
                 </div>
                 
                 <!-- Project 2: WhatsApp & Email Automation -->
-                <div class="glass-card p-8 rounded-2xl group hover:border-green-500/50 hover:scale-[1.02] cursor-pointer transition-all duration-300 tilt-card relative" onclick="openProjectModal('automation')">
-                    <div class="absolute top-4 right-4 text-xs text-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+                <div class="glass-card p-8 rounded-2xl group hover:border-accent/50 hover:scale-[1.02] cursor-pointer transition-all duration-300 tilt-card relative" onclick="openProjectModal('automation')">
+                    <div class="absolute top-4 right-4 text-xs text-accent/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
                         <i data-lucide="eye" class="w-4 h-4"></i> View
                     </div>
                     <div class="flex items-center gap-4 mb-6">
-                        <div class="p-3 bg-green-500/20 rounded-lg text-green-400"><i data-lucide="message-circle" class="w-8 h-8"></i></div>
+                        <div class="p-3 bg-accent/20 rounded-lg text-accent"><i data-lucide="message-circle" class="w-8 h-8"></i></div>
                         <div>
                             <h3 class="text-xl font-bold text-white">WhatsApp & Email Automation</h3>
                             <p class="text-sm text-gray-400">Reminder Tagihan & Broadcast Info</p>
@@ -906,7 +906,7 @@
                         <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-primary"></i> Contoh: Dashboard & Rekonsiliasi Data</li>
                         <li class="flex gap-2"><i data-lucide="clock" class="w-5 h-5 text-primary"></i> Pengerjaan: ±2-4 Minggu</li>
                     </ul>
-                    <a href="#kontak" class="w-full py-3 rounded-lg bg-primary text-darker font-bold text-center hover:bg-sky-400 transition shadow-lg shadow-primary/20">Pilih Standard</a>
+                    <a href="#kontak" class="w-full py-3 rounded-lg bg-primary text-darker font-bold text-center hover:bg-white hover:shadow-[0_0_15px_#00ff84] transition shadow-lg shadow-primary/20">Pilih Standard</a>
                 </div>
 
                 <!-- Premium -->
@@ -1068,7 +1068,7 @@
             </p>
             
             <div class="flex flex-col items-center gap-6" data-aos="zoom-in" data-aos-delay="200">
-                <a href="https://wa.me/6285111226452?text=Halo%20Zettbos,%20saya%20tertarik%20untuk%20konsultasi%20sistem%20bisnis." target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-10 py-5 rounded-full font-bold text-xl transition shadow-lg hover:shadow-green-500/20 flex items-center gap-3 w-full md:w-auto justify-center">
+                <a href="https://wa.me/6285111226452?text=Halo%20Zettbos,%20saya%20tertarik%20untuk%20konsultasi%20sistem%20bisnis." target="_blank" class="bg-primary hover:bg-white text-darker font-extrabold px-10 py-5 rounded-full text-xl transition shadow-lg hover:shadow-[0_0_20px_#00ff84] flex items-center gap-3 w-full md:w-auto justify-center">
                     <!-- SVG WhatsApp -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
@@ -1400,7 +1400,7 @@
                 const y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
                 const directionX = (Math.random() * 0.4) - 0.2;
                 const directionY = (Math.random() * 0.4) - 0.2;
-                const color = '#38bdf8'; 
+                const color = '#00ff84'; 
 
                 particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
             }
@@ -1413,7 +1413,7 @@
                     const distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
                     if (distance < (canvas.width / 7) * (canvas.height / 7)) {
                         opacityValue = 1 - (distance / 20000);
-                        ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue + ')';
+                        ctx.strokeStyle = 'rgba(0, 255, 132,' + opacityValue + ')';
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
