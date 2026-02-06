@@ -15,7 +15,7 @@
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Tailwind Config (Sama dengan Index) -->
+    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -62,7 +62,7 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.4; pointer-events: none;
         }
 
-        /* Glass Card Style (Consistent with Index) */
+        /* Glass Card Style */
         .glass-card {
             background: rgba(17, 24, 39, 0.6);
             backdrop-filter: blur(12px);
@@ -73,14 +73,14 @@
         
         .glass-card:hover {
             transform: translateY(-5px);
-            border-color: #00ff84; /* Neon Green Border on Hover */
-            box-shadow: 0 0 20px rgba(0, 255, 132, 0.2); /* Green Glow */
+            border-color: #00ff84; 
+            box-shadow: 0 0 20px rgba(0, 255, 132, 0.2); 
         }
 
         /* Input Styles */
         .zett-input {
             width: 100%;
-            background: #1f2937; /* Same as calc-input */
+            background: #1f2937;
             border: 1px solid #374151;
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
@@ -117,7 +117,7 @@
     <!-- PARTICLE BACKGROUND -->
     <canvas id="particles-canvas"></canvas>
 
-    <!-- NAVIGATION (Copied from Index) -->
+    <!-- NAVIGATION -->
     <nav class="fixed w-full z-50 glass-card border-b border-gray-800 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-3 group">
@@ -192,19 +192,7 @@
 
             <!-- GRID CONTAINER -->
             <div id="cardGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Skeleton Loader (Initial State) -->
-                <div class="glass-card p-6 rounded-2xl h-64 flex flex-col gap-4 border-none">
-                    <div class="h-6 w-1/3 rounded shimmer"></div>
-                    <div class="h-4 w-full rounded shimmer mt-2"></div>
-                    <div class="h-4 w-2/3 rounded shimmer"></div>
-                    <div class="mt-auto h-10 w-full rounded shimmer"></div>
-                </div>
-                <div class="glass-card p-6 rounded-2xl h-64 flex flex-col gap-4 border-none">
-                    <div class="h-6 w-1/3 rounded shimmer"></div>
-                    <div class="h-4 w-full rounded shimmer mt-2"></div>
-                    <div class="h-4 w-2/3 rounded shimmer"></div>
-                    <div class="mt-auto h-10 w-full rounded shimmer"></div>
-                </div>
+                <!-- Skeleton Loader -->
                 <div class="glass-card p-6 rounded-2xl h-64 flex flex-col gap-4 border-none">
                     <div class="h-6 w-1/3 rounded shimmer"></div>
                     <div class="h-4 w-full rounded shimmer mt-2"></div>
@@ -530,8 +518,6 @@
 
             try {
                 // Sending POST request to Apps Script
-                // Note: Apps Script Web App POST requests usually require 'no-cors' mode 
-                // or specific text/plain content type to avoid preflight issues in simple setups.
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors', // Important for simple GAS Web Apps
@@ -541,13 +527,9 @@
                     body: JSON.stringify(formData)
                 });
 
-                // Since 'no-cors' returns opaque response, we assume success if no error thrown
                 closeSubmitModal(); 
                 form.reset(); 
                 showToast("Terkirim!", "Kontribusi Anda sedang direview."); 
-                
-                // Refresh grid to see if it appears (if script adds immediately)
-                // setTimeout(() => fetchData(), 2000); 
 
             } catch (err) {
                 alert("Gagal mengirim: " + err.message);
