@@ -26,7 +26,7 @@
                         card: '#111827',
                         primary: '#00ff84', // NEON GREEN
                         secondary: '#ccff00', // LIME STABILO
-                        accent: '#ccff00', // LIME STABILO (Highlight)
+                        accent: '#ccff00', // LIME STABILO
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -40,14 +40,8 @@
                         'spin-slow': 'spin 3s linear infinite',
                     },
                     keyframes: {
-                        blink: {
-                            '0%, 100%': { opacity: '1' },
-                            '50%': { opacity: '0' },
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(10px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
+                        blink: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0' } },
+                        fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }
                     }
                 }
             }
@@ -57,12 +51,8 @@
     <style>
         body { background-color: #0B0F19; color: #f8fafc; overflow-x: hidden; }
         
-        /* Particle Canvas */
-        #particles-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.4; pointer-events: none;
-        }
+        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.4; pointer-events: none; }
 
-        /* Glass Card Style */
         .glass-card {
             background: rgba(17, 24, 39, 0.6);
             backdrop-filter: blur(12px);
@@ -77,7 +67,6 @@
             box-shadow: 0 0 20px rgba(0, 255, 132, 0.2); 
         }
 
-        /* Input Styles */
         .zett-input {
             width: 100%;
             background: #1f2937;
@@ -94,18 +83,13 @@
             box-shadow: 0 0 0 2px rgba(0, 255, 132, 0.2);
         }
 
-        /* Loading Shimmer */
         .shimmer {
             background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
             background-size: 200% 100%;
             animation: shimmer 1.5s infinite;
         }
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0B0F19; }
         ::-webkit-scrollbar-thumb { background: #11221c; border-radius: 4px; border: 1px solid #004d2a; }
@@ -114,7 +98,6 @@
 </head>
 <body class="antialiased font-sans">
 
-    <!-- PARTICLE BACKGROUND -->
     <canvas id="particles-canvas"></canvas>
 
     <!-- NAVIGATION -->
@@ -144,7 +127,7 @@
 
         <div class="max-w-7xl mx-auto">
             
-            <!-- HEADER AREA -->
+            <!-- HEADER -->
             <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
                 <div class="text-center md:text-left">
                     <div class="inline-flex items-center px-3 py-1 rounded-full border border-gray-700 bg-gray-900/50 mb-4 backdrop-blur-md">
@@ -154,27 +137,22 @@
                     <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-2">
                         Zettbos <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Library</span>
                     </h1>
-                    <p class="text-gray-400">Koleksi aset, template, dan prompt otomatisasi.</p>
+                    <p class="text-gray-400">Koleksi aset, template, dan prompt otomatisasi untuk klien Zettbos.</p>
                 </div>
 
                 <!-- ACTIONS -->
                 <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
-                    <!-- Search -->
                     <div class="relative w-full md:w-80 group">
                         <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5"></i>
-                        <input type="text" id="searchInput" placeholder="Cari aset..." class="zett-input pl-10">
+                        <input type="text" id="searchInput" placeholder="Cari fitur (cth: Chart.js)..." class="zett-input pl-10">
                     </div>
-                    
-                    <!-- Filter -->
                     <div class="relative w-full md:w-48">
                         <select id="categoryFilter" class="zett-input appearance-none cursor-pointer">
                             <option value="All">Semua Kategori</option>
                         </select>
                         <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none w-5 h-5"></i>
                     </div>
-
-                    <!-- Add Button -->
-                    <button onclick="openSubmitModal()" class="zett-input bg-primary/10 border-primary/30 text-primary hover:bg-primary hover:text-darker font-bold flex items-center justify-center gap-2 transition-all">
+                    <button onclick="openSubmitModal()" class="zett-input bg-primary/10 border border-primary/30 text-primary hover:bg-primary hover:text-darker font-bold flex items-center justify-center gap-2 transition-all cursor-pointer">
                         <i data-lucide="plus" class="w-5 h-5"></i> Kontribusi
                     </button>
                 </div>
@@ -183,16 +161,28 @@
             <!-- STATS BAR -->
             <div class="flex items-center justify-between mb-6 px-2">
                 <div class="flex items-center gap-2">
-                    <span id="itemCount" class="text-sm font-bold text-white bg-gray-800 px-3 py-1 rounded-full border border-gray-700">Loading...</span>
+                    <span id="itemCount" class="text-sm font-bold text-white bg-gray-800 px-3 py-1 rounded-full border border-gray-700">Connecting...</span>
                 </div>
-                <button onclick="fetchData(true)" id="refreshBtn" class="text-gray-400 hover:text-primary transition p-2 rounded-full hover:bg-gray-800">
+                <button onclick="fetchData(true)" id="refreshBtn" class="text-gray-400 hover:text-primary transition p-2 rounded-full hover:bg-gray-800" title="Refresh Data">
                     <i data-lucide="refresh-cw" id="refreshIcon" class="w-5 h-5"></i>
                 </button>
             </div>
 
             <!-- GRID CONTAINER -->
             <div id="cardGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Skeleton Loader -->
+                <!-- Skeleton Loaders -->
+                <div class="glass-card p-6 rounded-2xl h-64 flex flex-col gap-4 border-none">
+                    <div class="h-6 w-1/3 rounded shimmer"></div>
+                    <div class="h-4 w-full rounded shimmer mt-2"></div>
+                    <div class="h-4 w-2/3 rounded shimmer"></div>
+                    <div class="mt-auto h-10 w-full rounded shimmer"></div>
+                </div>
+                <div class="glass-card p-6 rounded-2xl h-64 flex flex-col gap-4 border-none">
+                    <div class="h-6 w-1/3 rounded shimmer"></div>
+                    <div class="h-4 w-full rounded shimmer mt-2"></div>
+                    <div class="h-4 w-2/3 rounded shimmer"></div>
+                    <div class="mt-auto h-10 w-full rounded shimmer"></div>
+                </div>
                 <div class="glass-card p-6 rounded-2xl h-64 flex flex-col gap-4 border-none">
                     <div class="h-6 w-1/3 rounded shimmer"></div>
                     <div class="h-4 w-full rounded shimmer mt-2"></div>
@@ -218,83 +208,67 @@
         <p>&copy; 2026 Zettbos. Workflow Automation Solutions.</p>
     </footer>
 
-    <!-- MODAL DETAIL (Quick View) -->
+    <!-- MODAL DETAIL -->
     <div id="quickViewModal" class="fixed inset-0 z-[100] hidden items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeDetail()"></div>
         <div class="relative w-full max-w-3xl glass-card rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-gray-700 animate-fade-in bg-darker">
-            
-            <!-- Modal Header -->
             <div class="px-8 py-6 border-b border-gray-800 flex items-center justify-between bg-gray-900/50">
                 <div class="flex flex-col gap-1">
                     <span id="modalBadge" class="w-fit px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">Category</span>
                     <h3 id="modalTitle" class="text-2xl font-display font-bold text-white mt-2">Title Here</h3>
                 </div>
-                <button onclick="closeDetail()" class="text-gray-400 hover:text-white transition p-2 rounded-full hover:bg-gray-800">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
+                <button onclick="closeDetail()" class="text-gray-400 hover:text-white transition p-2 rounded-full hover:bg-gray-800"><i data-lucide="x" class="w-6 h-6"></i></button>
             </div>
-            
-            <!-- Modal Body -->
             <div class="p-8 overflow-y-auto custom-scrollbar flex-grow space-y-6">
                 <div>
-                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
-                        <i data-lucide="info" class="w-4 h-4"></i> Deskripsi
-                    </h4>
+                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2"><i data-lucide="info" class="w-4 h-4"></i> Deskripsi (Fungsi)</h4>
                     <p id="modalDesc" class="text-gray-300 text-sm leading-relaxed whitespace-pre-line border-l-2 border-gray-700 pl-4">...</p>
                 </div>
                 <div>
-                    <h4 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 flex items-center gap-2">
-                        <i data-lucide="code" class="w-4 h-4"></i> Code / Prompt
-                    </h4>
+                    <h4 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 flex items-center gap-2"><i data-lucide="terminal" class="w-4 h-4"></i> Prompt / Code</h4>
                     <div class="relative group">
                         <pre id="modalPrompt" class="w-full bg-black/50 border border-gray-800 rounded-lg p-4 text-sm text-green-400 font-mono whitespace-pre-wrap leading-relaxed select-all max-h-60 overflow-y-auto custom-scrollbar">...</pre>
                         <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <span class="text-[10px] text-gray-400 bg-gray-900 px-2 py-1 rounded border border-gray-800">Klik untuk copy manual</span>
+                            <span class="text-[10px] text-gray-400 bg-gray-900 px-2 py-1 rounded border border-gray-800">Klik text untuk seleksi</span>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Modal Footer -->
             <div class="px-8 py-6 border-t border-gray-800 bg-gray-900/50 flex justify-end gap-3">
                 <button onclick="closeDetail()" class="px-6 py-3 rounded-lg text-sm font-bold text-gray-400 hover:text-white transition">Tutup</button>
                 <button id="modalCopyBtn" class="px-6 py-3 rounded-lg bg-primary hover:bg-white text-darker font-bold text-sm transition shadow-lg hover:shadow-[0_0_15px_#00ff84] flex items-center gap-2">
-                    <i data-lucide="copy" class="w-4 h-4"></i> Salin Semua
+                    <i data-lucide="copy" class="w-4 h-4"></i> Salin Prompt
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL SUBMIT (Kontribusi) -->
+    <!-- MODAL SUBMIT -->
     <div id="submitModal" class="fixed inset-0 z-[150] hidden items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-md transition-opacity" onclick="closeSubmitModal()"></div>
         <div class="relative w-full max-w-lg glass-card rounded-2xl shadow-2xl animate-fade-in flex flex-col max-h-[90vh] bg-darker border border-gray-700">
             <div class="px-6 py-5 border-b border-gray-800 bg-gray-900/50 flex items-center justify-between">
-                <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                    <i data-lucide="send" class="text-primary w-5 h-5"></i> Donasi Library
-                </h3>
+                <h3 class="text-lg font-bold text-white flex items-center gap-2"><i data-lucide="send" class="text-primary w-5 h-5"></i> Donasi Library</h3>
                 <button onclick="closeSubmitModal()" class="text-gray-400 hover:text-white transition"><i data-lucide="x" class="w-6 h-6"></i></button>
             </div>
             <div class="p-6 overflow-y-auto custom-scrollbar">
                 <form id="submissionForm" onsubmit="handleSubmission(event)">
                     <div class="space-y-5">
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Nama Fitur / Elemen *</label>
-                            <input type="text" name="title" required placeholder="Contoh: Auto Email Sender" class="zett-input">
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Nama Fitur (Keterangan) *</label>
+                            <input type="text" name="title" required placeholder="Contoh: Chart.js Integration" class="zett-input">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Kategori *</label>
-                            <select name="category" id="submitCategorySelect" class="zett-input cursor-pointer">
-                                <!-- Options populated by JS -->
-                            </select>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Jenis / Kategori *</label>
+                            <select name="category" id="submitCategorySelect" class="zett-input cursor-pointer"></select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Deskripsi</label>
-                            <textarea name="description" rows="2" placeholder="Jelaskan kegunaan singkatnya..." class="zett-input resize-none"></textarea>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Fungsi / Deskripsi</label>
+                            <textarea name="description" rows="2" placeholder="Jelaskan fungsinya..." class="zett-input resize-none"></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Prompt / Code *</label>
-                            <textarea name="prompt" required rows="5" placeholder="Paste kode atau prompt di sini..." class="zett-input font-mono text-xs text-green-400"></textarea>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Contoh Prompt *</label>
+                            <textarea name="prompt" required rows="5" placeholder="Paste prompt Gemini di sini..." class="zett-input font-mono text-xs text-green-400"></textarea>
                         </div>
                     </div>
                     <div class="mt-8 flex justify-end gap-3">
@@ -308,7 +282,7 @@
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION -->
+    <!-- TOAST -->
     <div id="toast" class="fixed bottom-10 right-8 translate-y-20 opacity-0 transition-all duration-300 z-[200]">
         <div class="bg-gray-900 border border-primary/30 shadow-[0_0_15px_rgba(0,255,132,0.2)] rounded-lg px-6 py-4 flex items-center gap-4">
             <div class="bg-primary/20 p-2 rounded-full text-primary"><i data-lucide="check" class="w-5 h-5"></i></div>
@@ -319,15 +293,13 @@
         </div>
     </div>
 
-    <!-- LOGIC SCRIPT -->
     <script>
-        // --- 1. CONFIGURATION ---
-        // URL Apps Script dari user
+        // --- CONFIGURATION ---
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyiwfVwegUIWJNjR-SEduRqvkbT2gdZUe_O8Lx5jAS1w9rRuXGIX_pyvLio0MwKZwfLPg/exec";
         
         const state = { rawData: [], filteredData: [], categories: new Set(), searchQuery: '', filterCategory: 'All' };
         
-        // --- 2. DOM ELEMENTS ---
+        // DOM ELEMENTS
         const gridEl = document.getElementById('cardGrid');
         const searchInput = document.getElementById('searchInput');
         const categorySelect = document.getElementById('categoryFilter');
@@ -336,7 +308,7 @@
         const toastEl = document.getElementById('toast');
         const refreshIcon = document.getElementById('refreshIcon');
         
-        // Modal Elements
+        // MODAL ELEMENTS
         const modalEl = document.getElementById('quickViewModal');
         const modalTitle = document.getElementById('modalTitle');
         const modalBadge = document.getElementById('modalBadge');
@@ -344,42 +316,40 @@
         const modalPrompt = document.getElementById('modalPrompt');
         const modalCopyBtn = document.getElementById('modalCopyBtn');
 
-        // Submit Elements
+        // SUBMIT ELEMENTS
         const submitModalEl = document.getElementById('submitModal');
         const submitCategorySelect = document.getElementById('submitCategorySelect');
         const submitBtn = document.getElementById('submitBtn');
 
-        // --- 3. INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => { 
-            lucide.createIcons(); // Init Icons
-            fetchData(); // Load Data
-            initParticles(); // Background
+            lucide.createIcons(); 
+            fetchData(); 
+            initParticles(); 
         });
 
-        // --- 4. FETCH DATA (CONNECT TO APPS SCRIPT) ---
         async function fetchData(forceRefresh = false) {
             if(forceRefresh) refreshIcon.classList.add('animate-spin-slow');
+            itemCountEl.innerText = "Mengambil data...";
             
             try {
-                // Fetching from the Web App URL via GET
+                // Gunakan URL yang diberikan dengan parameter action
                 const response = await fetch(`${SCRIPT_URL}?action=getDataLibrary`);
-                if (!response.ok) throw new Error('Network response was not ok');
+                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
                 
                 const data = await response.json();
                 onDataSuccess(data);
-                
-                if(forceRefresh) {
-                    showToast("Sukses", "Library berhasil diperbarui.");
-                }
+                if(forceRefresh) showToast("Sukses", "Data library diperbarui.");
             } catch (error) {
                 console.error("Fetch Error:", error);
                 gridEl.innerHTML = `
-                    <div class="col-span-full text-center py-10">
-                        <div class="inline-block p-4 rounded-full bg-red-900/20 text-red-500 mb-4"><i data-lucide="alert-triangle" class="w-8 h-8"></i></div>
-                        <p class="text-gray-400">Gagal memuat data dari server.</p>
-                        <p class="text-xs text-gray-600 mt-2">${error.message}</p>
+                    <div class="col-span-full text-center py-12">
+                        <div class="inline-block p-4 rounded-full bg-red-900/20 text-red-500 mb-4 border border-red-900/50"><i data-lucide="alert-triangle" class="w-10 h-10"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Gagal Terhubung</h3>
+                        <p class="text-gray-400 mb-4">Pastikan Anda sudah 'Deploy New Version' di Apps Script.</p>
+                        <button onclick="fetchData(true)" class="px-6 py-2 rounded-full bg-primary text-darker font-bold text-sm hover:bg-white transition">Coba Lagi</button>
                     </div>`;
                 lucide.createIcons();
+                itemCountEl.innerText = "Error";
             } finally {
                 if(forceRefresh) setTimeout(() => refreshIcon.classList.remove('animate-spin-slow'), 1000);
             }
@@ -388,19 +358,19 @@
         function onDataSuccess(data) {
             state.rawData = data; 
             state.categories.clear();
-            
-            // Extract categories
-            data.forEach(item => { if(item.category) state.categories.add(item.category); });
-            
+            if (Array.isArray(data)) {
+                data.forEach(item => { if(item && item.category) state.categories.add(item.category); });
+            }
             populateCategoryFilter(); 
             applyFilters();
         }
 
-        // --- 5. FILTERING & RENDERING ---
         function applyFilters() {
             const query = state.searchQuery.toLowerCase();
             const cat = state.filterCategory;
             
+            if (!Array.isArray(state.rawData)) { state.filteredData = []; renderGrid(); return; }
+
             state.filteredData = state.rawData.filter(item => {
                 const matchesSearch = (item.title || '').toLowerCase().includes(query) || 
                                       (item.description || '').toLowerCase().includes(query) || 
@@ -408,41 +378,31 @@
                 const matchesCategory = cat === 'All' || item.category === cat;
                 return matchesSearch && matchesCategory;
             });
-            
             renderGrid();
         }
 
         function renderGrid() {
             itemCountEl.innerText = `${state.filteredData.length} Items`;
-            
             if (state.filteredData.length === 0) { 
-                gridEl.classList.add('hidden'); 
-                emptyStateEl.classList.remove('hidden'); 
-                emptyStateEl.classList.add('flex'); 
+                gridEl.classList.add('hidden'); emptyStateEl.classList.remove('hidden'); emptyStateEl.classList.add('flex'); 
             } else { 
-                emptyStateEl.classList.add('hidden'); 
-                emptyStateEl.classList.remove('flex'); 
-                gridEl.classList.remove('hidden'); 
+                emptyStateEl.classList.add('hidden'); emptyStateEl.classList.remove('flex'); gridEl.classList.remove('hidden'); 
             }
-            
             gridEl.innerHTML = '';
             
             state.filteredData.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'glass-card p-6 rounded-2xl group cursor-pointer flex flex-col h-full relative overflow-hidden';
                 card.onclick = () => openDetail(item);
-                
-                // Content
                 card.innerHTML = `
                     <div class="flex justify-between items-start mb-4">
                         <span class="px-3 py-1 rounded-full text-xs font-bold bg-gray-800 text-gray-300 border border-gray-700 group-hover:border-primary group-hover:text-primary transition-colors">${item.category || 'General'}</span>
                         <i data-lucide="external-link" class="w-4 h-4 text-gray-600 group-hover:text-white transition-colors"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">${item.title}</h3>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">${item.title || 'Untitled'}</h3>
                     <p class="text-sm text-gray-400 leading-relaxed mb-6 flex-grow line-clamp-3">${item.description || 'Tidak ada deskripsi.'}</p>
-                    
                     <div class="mt-auto pt-4 border-t border-gray-800 flex items-center justify-between">
-                        <span class="text-xs text-gray-500 font-mono">ID: ${Math.floor(Math.random()*1000)}</span>
+                        <span class="text-xs text-gray-500 font-mono flex items-center gap-1"><div class="w-1.5 h-1.5 rounded-full bg-green-500"></div> Ready</span>
                         <button onclick="event.stopPropagation(); copyPrompt('${escapeHtml(item.prompt || '')}')" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-white hover:text-darker text-gray-300 text-xs font-bold transition-all z-10 border border-gray-700 hover:border-white">
                             <i data-lucide="copy" class="w-3 h-3"></i> Copy
                         </button>
@@ -453,221 +413,106 @@
             lucide.createIcons();
         }
 
-        // --- 6. INTERACTIONS (Modals & Submit) ---
         function openDetail(item) {
             modalTitle.innerText = item.title;
             modalDesc.innerText = item.description || '-';
             modalPrompt.textContent = item.prompt || '';
             modalBadge.innerText = item.category || 'General';
-            
             modalCopyBtn.onclick = () => copyPrompt(item.prompt || '');
-
-            modalEl.classList.remove('hidden'); 
-            modalEl.classList.add('flex'); 
-            document.body.style.overflow = 'hidden';
+            modalEl.classList.remove('hidden'); modalEl.classList.add('flex'); document.body.style.overflow = 'hidden';
         }
 
-        function closeDetail() { 
-            modalEl.classList.add('hidden'); 
-            modalEl.classList.remove('flex'); 
-            document.body.style.overflow = ''; 
-        }
+        function closeDetail() { modalEl.classList.add('hidden'); modalEl.classList.remove('flex'); document.body.style.overflow = ''; }
 
         function openSubmitModal() {
-            // Populate categories
             submitCategorySelect.innerHTML = '';
-            Array.from(state.categories).sort().forEach(cat => { 
-                let opt = document.createElement('option'); 
-                opt.value = cat; 
-                opt.text = cat; 
-                submitCategorySelect.add(opt); 
-            });
-            let otherOpt = document.createElement('option'); 
-            otherOpt.value = 'Other'; 
-            otherOpt.text = '+ Tambah Baru (Tulis di Judul)'; 
-            submitCategorySelect.add(otherOpt);
-            
-            submitModalEl.classList.remove('hidden'); 
-            submitModalEl.classList.add('flex'); 
-            document.body.style.overflow = 'hidden';
+            if (state.categories.size > 0) {
+                Array.from(state.categories).sort().forEach(cat => { let opt = document.createElement('option'); opt.value = cat; opt.text = cat; submitCategorySelect.add(opt); });
+            } else {
+                let opt = document.createElement('option'); opt.value = 'General'; opt.text = 'General'; submitCategorySelect.add(opt);
+            }
+            let otherOpt = document.createElement('option'); otherOpt.value = 'Other'; otherOpt.text = '+ Tambah Baru (Tulis di Judul)'; submitCategorySelect.add(otherOpt);
+            submitModalEl.classList.remove('hidden'); submitModalEl.classList.add('flex'); document.body.style.overflow = 'hidden';
         }
 
-        function closeSubmitModal() { 
-            submitModalEl.classList.add('hidden'); 
-            submitModalEl.classList.remove('flex'); 
-            document.body.style.overflow = ''; 
-        }
+        function closeSubmitModal() { submitModalEl.classList.add('hidden'); submitModalEl.classList.remove('flex'); document.body.style.overflow = ''; }
 
-        // Handle Submission via fetch POST
         async function handleSubmission(e) {
             e.preventDefault();
             const originalBtnText = submitBtn.innerHTML;
-            
-            // UI Loading
-            submitBtn.disabled = true; 
-            submitBtn.innerHTML = `<span>Mengirim...</span>`; 
-            submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+            submitBtn.disabled = true; submitBtn.innerHTML = `<span>Mengirim...</span>`; submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
             
             const form = document.getElementById('submissionForm');
-            const formData = { 
-                title: form.title.value, 
-                category: form.category.value, 
-                description: form.description.value, 
-                prompt: form.prompt.value 
-            };
+            const formData = { title: form.title.value, category: form.category.value, description: form.description.value, prompt: form.prompt.value };
 
             try {
-                // Sending POST request to Apps Script
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Important for simple GAS Web Apps
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
-
-                closeSubmitModal(); 
-                form.reset(); 
-                showToast("Terkirim!", "Kontribusi Anda sedang direview."); 
-
+                closeSubmitModal(); form.reset(); showToast("Terkirim!", "Kontribusi Anda sedang direview.");
             } catch (err) {
                 alert("Gagal mengirim: " + err.message);
             } finally {
-                submitBtn.disabled = false; 
-                submitBtn.innerHTML = originalBtnText; 
-                submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+                submitBtn.disabled = false; submitBtn.innerHTML = originalBtnText; submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
             }
         }
 
-        // --- 7. UTILITIES ---
         function populateCategoryFilter() {
             while (categorySelect.options.length > 1) categorySelect.remove(1);
-            Array.from(state.categories).sort().forEach(cat => {
-                let opt = document.createElement('option'); 
-                opt.value = cat; 
-                opt.text = cat; 
-                categorySelect.add(opt);
-            });
+            if (state.categories.size > 0) {
+                Array.from(state.categories).sort().forEach(cat => { let opt = document.createElement('option'); opt.value = cat; opt.text = cat; categorySelect.add(opt); });
+            }
             categorySelect.value = state.filterCategory;
         }
 
         function copyPrompt(text) {
             if(!text) return;
-            const textArea = document.createElement("textarea"); 
-            textArea.value = text; 
-            textArea.style.position = "fixed"; 
-            document.body.appendChild(textArea); 
-            textArea.focus(); 
-            textArea.select();
-            try { 
-                if(document.execCommand('copy')) showToast("Tersalin!", "Siap digunakan."); 
-            } catch (err) { 
-                console.error(err); 
-            } 
-            document.body.removeChild(textArea);
+            const textArea = document.createElement("textarea"); textArea.value = text; textArea.style.position = "fixed"; document.body.appendChild(textArea); textArea.focus(); textArea.select();
+            try { if(document.execCommand('copy')) showToast("Tersalin!", "Siap digunakan."); } catch (err) { console.error(err); } document.body.removeChild(textArea);
         }
 
         function showToast(title, msg) {
-            const titleEl = toastEl.querySelector('h4'); 
-            const msgEl = toastEl.querySelector('p'); 
-            if(title) titleEl.innerText = title; 
-            if(msg) msgEl.innerText = msg;
-            
-            toastEl.classList.remove('translate-y-20', 'opacity-0'); 
-            setTimeout(() => { 
-                toastEl.classList.add('translate-y-20', 'opacity-0'); 
-            }, 3000);
+            const titleEl = toastEl.querySelector('h4'); const msgEl = toastEl.querySelector('p'); if(title) titleEl.innerText = title; if(msg) msgEl.innerText = msg;
+            toastEl.classList.remove('translate-y-20', 'opacity-0'); setTimeout(() => { toastEl.classList.add('translate-y-20', 'opacity-0'); }, 3000);
         }
 
-        function escapeHtml(unsafe) { 
-            return unsafe
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;"); 
-        }
+        function escapeHtml(unsafe) { return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); }
 
-        // Listeners
-        searchInput.addEventListener('input', (e) => { 
-            state.searchQuery = e.target.value; 
-            applyFilters(); 
-        });
-        
-        categorySelect.addEventListener('change', (e) => { 
-            state.filterCategory = e.target.value; 
-            applyFilters(); 
-        });
+        searchInput.addEventListener('input', (e) => { state.searchQuery = e.target.value; applyFilters(); });
+        categorySelect.addEventListener('change', (e) => { state.filterCategory = e.target.value; applyFilters(); });
 
-        // --- 8. PARTICLE EFFECT (Copied Logic) ---
         function initParticles() {
-            const canvas = document.getElementById('particles-canvas');
-            const ctx = canvas.getContext('2d');
-            let particlesArray = [];
-
-            const resizeCanvas = () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            };
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-                init();
-            });
+            const canvas = document.getElementById('particles-canvas'); const ctx = canvas.getContext('2d'); let particlesArray = [];
+            const resizeCanvas = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+            window.addEventListener('resize', () => { resizeCanvas(); init(); });
             resizeCanvas();
-
             class Particle {
-                constructor(x, y, directionX, directionY, size, color) {
-                    this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color;
-                }
-                draw() {
-                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = this.color; ctx.fill();
-                }
-                update() {
-                    if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                    if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                    this.x += this.directionX; this.y += this.directionY; this.draw();
-                }
+                constructor(x, y, directionX, directionY, size, color) { this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color; }
+                draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = this.color; ctx.fill(); }
+                update() { if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX; if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY; this.x += this.directionX; this.y += this.directionY; this.draw(); }
             }
-
             function init() {
-                particlesArray = [];
-                let numberOfParticles = (canvas.width * canvas.height) / 15000;
+                particlesArray = []; let numberOfParticles = (canvas.width * canvas.height) / 15000;
                 for (let i = 0; i < numberOfParticles; i++) {
-                    let size = (Math.random() * 2) + 1;
-                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                    let directionX = (Math.random() * 0.4) - 0.2;
-                    let directionY = (Math.random() * 0.4) - 0.2;
-                    let color = '#00ff84'; // Neon Green
+                    let size = (Math.random() * 2) + 1; let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2); let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * 0.4) - 0.2; let directionY = (Math.random() * 0.4) - 0.2; let color = '#00ff84'; 
                     particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
                 }
             }
-
             function connect() {
                 let opacityValue = 1;
                 for (let a = 0; a < particlesArray.length; a++) {
                     for (let b = a; b < particlesArray.length; b++) {
                         let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                        if (distance < (canvas.width/7) * (canvas.height/7)) {
-                            opacityValue = 1 - (distance/20000);
-                            ctx.strokeStyle = 'rgba(0, 255, 132,' + opacityValue + ')';
-                            ctx.lineWidth = 1;
-                            ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
-                        }
+                        if (distance < (canvas.width/7) * (canvas.height/7)) { opacityValue = 1 - (distance/20000); ctx.strokeStyle = 'rgba(0, 255, 132,' + opacityValue + ')'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke(); }
                     }
                 }
             }
-
-            function animate() {
-                requestAnimationFrame(animate);
-                ctx.clearRect(0, 0, innerWidth, innerHeight);
-                for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); }
-                connect();
-            }
-
-            init();
-            animate();
+            function animate() { requestAnimationFrame(animate); ctx.clearRect(0, 0, innerWidth, innerHeight); for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); } connect(); }
+            init(); animate();
         }
     </script>
 </body>
