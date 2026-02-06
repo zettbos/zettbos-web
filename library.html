@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | Zettbos</title>
+    <meta name="description" content="Koleksi template, panduan, dan resource Zettbos.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0B0F19',
+                        darker: '#050912',
+                        card: '#111827',
+                        primary: '#00ff84', // NEON GREEN
+                        secondary: '#ccff00', // LIME STABILO
+                        accent: '#ccff00', // LIME STABILO (Highlight)
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        brand: ['Montserrat', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'blink': 'blink 1s step-end infinite',
+                    },
+                    keyframes: {
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #0B0F19; color: #f8fafc; overflow-x: hidden; }
+        
+        section {
+            position: relative;
+            z-index: 10;
+            background-color: rgba(11, 15, 25, 0.85);
+        }
+        
+        .glass-card {
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cta-glow {
+            box-shadow: 0 0 25px rgba(0, 255, 132, 0.4); 
+        }
+
+        /* Particle Canvas */
+        #particles-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; opacity: 0.4; pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- PARTICLE BACKGROUND -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 glass-card border-b border-gray-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <img src="zettbos.png" alt="Zettbos Logo" class="h-8 md:h-10 w-auto object-contain group-hover:scale-105 transition duration-300">
+                <span class="font-brand text-2xl font-bold tracking-wide text-white group-hover:text-primary transition duration-300">ZETTBOS</span>
+            </a>
+
+            <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-400">
+                <a href="index.html" class="hover:text-primary transition">Home</a>
+                <a href="index.html#projek" class="hover:text-primary transition">Portofolio</a> 
+                <a href="#" class="text-primary font-bold transition">Library</a>
+                <a href="index.html#kontak" class="hover:text-primary transition">Kontak</a> 
+            </div>
+            <a href="index.html#kontak" class="hidden md:inline-block bg-white text-dark px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition transform hover:scale-105 border border-transparent hover:border-primary">
+                Hubungi Kami
+            </a>
+            <button class="md:hidden text-white"><i data-lucide="menu"></i></button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <section class="relative pt-40 pb-20 min-h-screen">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">Zettbos <span class="text-primary">Library</span></h1>
+                <p class="text-gray-400 text-lg">Pusat sumber daya, template, dan panduan untuk efisiensi bisnis Anda.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Template Item 1 -->
+                <div class="glass-card p-6 rounded-2xl group hover:border-primary/50 transition">
+                    <div class="h-40 bg-gray-800/50 rounded-xl mb-4 flex items-center justify-center border border-gray-700">
+                        <i data-lucide="file-spreadsheet" class="w-12 h-12 text-primary opacity-50 group-hover:opacity-100 transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Template Kas Kecil</h3>
+                    <p class="text-sm text-gray-400 mb-4">Format Excel sederhana untuk mencatat pengeluaran operasional harian.</p>
+                    <button class="text-primary text-sm font-bold flex items-center gap-2 hover:gap-3 transition-all">Download <i data-lucide="download" class="w-4 h-4"></i></button>
+                </div>
+
+                <!-- Template Item 2 -->
+                <div class="glass-card p-6 rounded-2xl group hover:border-primary/50 transition">
+                    <div class="h-40 bg-gray-800/50 rounded-xl mb-4 flex items-center justify-center border border-gray-700">
+                        <i data-lucide="calculator" class="w-12 h-12 text-primary opacity-50 group-hover:opacity-100 transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Kalkulator Gaji (Pph21)</h3>
+                    <p class="text-sm text-gray-400 mb-4">Hitung estimasi gaji bersih karyawan dan pajak PPh 21 terbaru.</p>
+                    <button class="text-primary text-sm font-bold flex items-center gap-2 hover:gap-3 transition-all">Akses Tools <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                </div>
+
+                <!-- Template Item 3 -->
+                <div class="glass-card p-6 rounded-2xl group hover:border-primary/50 transition">
+                    <div class="h-40 bg-gray-800/50 rounded-xl mb-4 flex items-center justify-center border border-gray-700">
+                        <i data-lucide="book-open" class="w-12 h-12 text-primary opacity-50 group-hover:opacity-100 transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Panduan SOP Keuangan</h3>
+                    <p class="text-sm text-gray-400 mb-4">E-book singkat tentang cara menyusun SOP keuangan yang rapi.</p>
+                    <button class="text-primary text-sm font-bold flex items-center gap-2 hover:gap-3 transition-all">Baca Panduan <i data-lucide="book" class="w-4 h-4"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-10 border-t border-gray-800 text-center text-gray-500 text-sm bg-darker">
+        <p>&copy; 2026 Zettbos. Workflow Automation Solutions.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Particle Logic (Sama dengan Index)
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            const numberOfParticles = (canvas.width * canvas.height) / 15000; 
+            for (let i = 0; i < numberOfParticles; i++) {
+                const size = (Math.random() * 2) + 1;
+                const x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                const y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                const directionX = (Math.random() * 0.4) - 0.2;
+                const directionY = (Math.random() * 0.4) - 0.2;
+                const color = '#00ff84'; 
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    const distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = 'rgba(0, 255, 132,' + opacityValue + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        init();
+        animate();
+    </script>
+</body>
+</html>
